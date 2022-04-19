@@ -8,53 +8,43 @@
 from scipy import signal
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.ticker
-import csv
 
 
-def data_loader(PATH):
-    data = []
-    with open(PATH, 'r') as f:
-        line = csv.reader(f)
-        for item in line:
-            data = [int(x) for x in item]
-        data = np.array(data)
-    return data
+class iir_design_filter:
+    def __init__(self, load_path, save_path, sample_rate=2302, f_pass=40.0, f_stop=48.0, a_pass=1.0, a_stop=80.0):
+        self.load_path = load_path
+        self.save_path = save_path
+        self.sample_rate = sample_rate
+        self.f_pass = f_pass
+        self.f_stop = f_stop
+        self.a_pass = a_pass
+        self.a_stop = a_stop
 
+        self.raw_data = None
+        self.filtered_data = None
+        self.length = None
 
-def iir_design_filter(path: str, sample_rate: int, f_pass: float, f_stop: float, a_pass: float, a_stop: float) -> None:
-    # load data
-    data = data_loader(path)
+    def filter_(self, env_data=None):
 
-    N = len(data)
-    t = np.linspace(0, 1, N)
+        b, a = signal.iirdesign(wp=self.f_pass, ws=self.f_stop, gpass=self.a_pass, gstop=self.a_stop, analog=False,
+                                ftype='ellip',
+                                output='ba', fs=self.sample_rate)
 
-    # show the raw data picture
-    plt.figure(figsize=(16, 9))
-    plt.plot(t, data, label='Raw Data')
+        if env_data is None:
+            self.raw_data = np.loadtxt(self.load_path, delimiter=',')
+            self.length = len(self.raw_data)
+            self.filtered_data = signal.filtfilt(b, a, self.raw_data)
 
-    # design the filter
-    b, a = signal.iirdesign(wp=f_pass, ws=f_stop, gpass=a_pass, gstop=a_stop, analog=False, ftype='ellip', output='ba', fs=sample_rate)
-    filtered = signal.lfilter(b, a, data)
-    filtered = np.array(filtered, dtype=int)
+            np.savetxt(fname=self.save_path, X=self.filtered_data)
+        else:
+            self.filtered_data = signal.filtfilt(b, a, env_data)
 
-    # save the filtered data
-    save_path = 'filtered_' + path[2:]
-    with open(save_path, 'w', newline='') as file:
-        writer = csv.writer(file, lineterminator='\n')
-        writer.writerows([filtered])
-    file.close()
+        return self.filtered_data
 
-    # show the filtered data
-    plt.plot(t, filtered, label='Filtered Data')
-    plt.legend(loc='upper left')
-    plt.savefig('./picture.jpg')
-    plt.show()
-
-
-if __name__ == "__main__":
-    iir_design_filter('./random_1.csv', 2800, 40.0, 48.0, 1.0, 80.0)
-    iir_design_filter('./operator_1.csv', 2800, 40.0, 48.0, 1.0, 80.0)
-    iir_design_filter('./operator_2.csv', 2800, 40.0, 48.0, 1.0, 80.0)
-    iir_design_filter('./operator_3.csv', 2800, 40.0, 48.0, 1.0, 80.0)
-    iir_design_filter('./operator_4.csv', 2800, 40.0, 48.0, 1.0, 80.0)
+    def plot_(self):
+        t = np.linspace(0, 1, self.length)
+        plt.figure(figsize=(16, 9))
+        plt.plot(t, self.raw_data, label='Raw Data')
+        plt.plot(t, self.filtered_data, label='Filtered Data')
+        plt.legend(loc='upper left')
+        plt.show()
