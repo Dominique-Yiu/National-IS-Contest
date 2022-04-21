@@ -13,14 +13,17 @@ from filter import iir_design_filter
 
 
 class collect_data:
-    def __init__(self, port='COM3', rate=115200, m_time=20, load_path=None, save_path=None):
+    def __init__(self, port='COM3', rate=115200, m_time=20):
         self.serial_port = port
         self.serial_rate = rate
         self.measuring_time = m_time * 2302
         self.ser = serial.Serial(self.serial_port, self.serial_rate, timeout=5)
-        self.filter = iir_design_filter(load_path, save_path)
+        self.filter = iir_design_filter()
+        self.ser.close()
 
+    '''get environment's intensity'''
     def get_env_intensity(self, m_time=10):
+        self.ser.open()
         print('Please guarantee your environment in  a stable status. Waiting......')
         time.sleep(1)
 
@@ -37,11 +40,12 @@ class collect_data:
                 pass
         self.ser.close()
 
-        average_series = self.filter.filter_(average_series)
-        print('Calculate Complete.')
-        return average_series.mean()
+        average_series = self.filter.filter_(env_data=average_series)
+        result = average_series.mean()
+        print('Calculate Complete.', f'the average intensity is {result}')
+        return result
 
-    def start(self):
+    def start(self, load_path, save_path):
         self.ser.open()
         print('Please guarantee your environment in  a stable status. Waiting......')
         time.sleep(1)
@@ -49,7 +53,7 @@ class collect_data:
         for i in range(3):
             print(f"\r{3 - i} seconds later, start collecting.", end="")
             time.sleep(1)
-        print('\nStart collecting average intensity of environment magnetic field.', end="")
+        print('\nStart collecting average intensity of environment magnetic field.', end="\n")
 
         string_a = np.zeros(shape=self.measuring_time)
         string_a_list = []
@@ -60,7 +64,7 @@ class collect_data:
                 string_a[i] = self.ser.readline()
             except:
                 pass
-        with open(r"./ycw/ycw_1.csv", 'w', newline='') as t:
+        with open(load_path, 'w', newline='') as t:
             writer = csv.writer(t, lineterminator='\n')
             for item in string_a:
                 string_a_list.append(int(item))
@@ -71,4 +75,12 @@ class collect_data:
         print('Collect Complete!')
         self.ser.close()
 
-        self.filter.filter_()
+        self.filter.filter_(load_path=load_path, save_path=save_path)
+
+
+L_path = 'random_data.csv'
+S_path = 'filtered_random_data.csv'
+adc = collect_data()
+adc.start(load_path=L_path, save_path=S_path)
+adc.get_env_intensity()
+adc.filter.plot_()
