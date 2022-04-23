@@ -22,6 +22,7 @@ class collect_data:
         self.ser.close()
 
     '''get environment's intensity'''
+
     def get_env_intensity(self, m_time=10):
         self.ser.open()
         print('Please guarantee your environment in  a stable status. Waiting......')
@@ -42,10 +43,27 @@ class collect_data:
 
         average_series = self.filter.filter_(env_data=average_series)
         result = average_series.mean()
+        self.env_intensity = result
         print('Calculate Complete.', f'the average intensity is {result}')
-        return result
 
-    def start(self, load_path, save_path):
+    def get_rhythm_number(self):
+        env_threshold = self.env_intensity * 0.9
+        last_status = False
+        status = last_status
+        rhythm_number = 0
+
+        for item in self.filter.filtered_data:
+            if item < env_threshold:
+                last_status = status
+                status = True
+                if not last_status:
+                    rhythm_number += 1
+            else:
+                last_status = status
+                status = False
+        return rhythm_number
+
+    def start(self, load_path=None, save_path=None):
         self.ser.open()
         print('Please guarantee your environment in  a stable status. Waiting......')
         time.sleep(1)
@@ -64,23 +82,23 @@ class collect_data:
                 string_a[i] = self.ser.readline()
             except:
                 pass
-        with open(load_path, 'w', newline='') as t:
-            writer = csv.writer(t, lineterminator='\n')
-            for item in string_a:
-                string_a_list.append(int(item))
-            writer.writerows([string_a_list])
-        t.close()
+        if load_path is not None:
+            with open(load_path, 'w', newline='') as t:
+                writer = csv.writer(t, lineterminator='\n')
+                for item in string_a:
+                    string_a_list.append(int(item))
+                writer.writerows([string_a_list])
+            t.close()
         time.sleep(0.2)
-        string_a = np.zeros(shape=self.measuring_time)
         print('Collect Complete!')
         self.ser.close()
+        # return filtered data
+        return self.filter.filter_(raw_data=string_a, load_path=load_path, save_path=save_path)
 
-        self.filter.filter_(load_path=load_path, save_path=save_path)
 
-
-L_path = 'random_data.csv'
-S_path = 'filtered_random_data.csv'
-adc = collect_data()
-adc.start(load_path=L_path, save_path=S_path)
-adc.get_env_intensity()
-adc.filter.plot_()
+# L_path = 'random_data.csv'
+# S_path = 'filtered_random_data.csv'
+# adc = collect_data()
+# adc.start(load_path=L_path, save_path=S_path)
+# adc.get_env_intensity()
+# adc.filter.plot_()

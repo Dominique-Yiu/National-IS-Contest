@@ -22,18 +22,21 @@ class iir_design_filter:
         self.filtered_data = None
         self.length = None
 
-    def filter_(self, env_data=None, load_path=None, save_path=None):
+    def filter_(self, env_data=None, raw_data=None, load_path=None, save_path=None):
 
         b, a = signal.iirdesign(wp=self.f_pass, ws=self.f_stop, gpass=self.a_pass, gstop=self.a_stop, analog=False,
                                 ftype='ellip',
                                 output='ba', fs=self.sample_rate)
 
         if env_data is None:
-            self.raw_data = np.loadtxt(load_path, delimiter=',')
+            if load_path is not None:
+                self.raw_data = np.loadtxt(load_path, delimiter=',')
+            else:
+                self.raw_data = raw_data
             self.length = len(self.raw_data)
             self.filtered_data = signal.filtfilt(b, a, self.raw_data)
-
-            np.savetxt(fname=save_path, X=self.filtered_data)
+            if save_path is not None:
+                np.savetxt(fname=save_path, X=self.filtered_data)
         else:
             return signal.filtfilt(b, a, env_data)
 
@@ -49,7 +52,7 @@ class iir_design_filter:
 
 
 # L_path = 'LXY_两快一慢/LXY_01.csv'
-# S_path = 'filtered_LXY_01.csv'
+# S_path = 'filtered_.csv'
 # _filter = iir_design_filter()
 # _filter.filter_(load_path=L_path, save_path=S_path)
 # _filter.plot_()

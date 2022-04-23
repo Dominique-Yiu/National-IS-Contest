@@ -12,7 +12,7 @@ from scipy.signal import find_peaks
 
 
 class window_var:
-    def __init__(self, path, head=3):
+    def __init__(self, path, head=12):
         self.load_path = path
         self.head = head
         self.data = np.loadtxt(self.load_path)
@@ -37,7 +37,7 @@ class window_var:
         lin1 = ax.plot(self.data)
 
         ax2 = ax.twinx()
-        lin2 = ax2.plot(self.move_var, Color='r')
+        lin2 = ax2.plot(self.move_var, color='r')
         ax2.scatter(self.biggest_peaks_index, self.biggest_peaks, marker='+', color='g', s=200)
 
         lines = lin1 + lin2

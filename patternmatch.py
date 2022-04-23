@@ -115,6 +115,6 @@ class pattern_match:
         plt.show()
 
 
-match = pattern_match('LXY_两快一慢/enveloped_data_01.csv')
-match.start()
-match.plot_()
+# match = pattern_match('LXY_两快一慢/enveloped_data_01.csv')
+# match.start()
+# match.plot_()
