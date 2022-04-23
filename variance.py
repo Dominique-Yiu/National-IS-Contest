@@ -12,10 +12,13 @@ from scipy.signal import find_peaks
 
 
 class window_var:
-    def __init__(self, path, head=12):
+    def __init__(self, path=None, data=None, head=12):
         self.load_path = path
-        self.head = head
-        self.data = np.loadtxt(self.load_path)
+        self.head = head * 2
+        if path is None:
+            self.data = data
+        else:
+            self.data = np.loadtxt(self.load_path)
         self.peaks = None
         self.biggest_peaks_index = None
         self.biggest_peaks = None

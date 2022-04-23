@@ -14,6 +14,7 @@ from filter import iir_design_filter
 
 class collect_data:
     def __init__(self, port='COM3', rate=115200, m_time=20):
+        self.env_intensity = None
         self.serial_port = port
         self.serial_rate = rate
         self.measuring_time = m_time * 2302
@@ -63,7 +64,8 @@ class collect_data:
                 status = False
         return rhythm_number
 
-    def start(self, load_path=None, save_path=None):
+    def start(self, load_path=None, save_path=None, m_time=10):
+        self.measuring_time = m_time * 2302
         self.ser.open()
         print('Please guarantee your environment in  a stable status. Waiting......')
         time.sleep(1)

@@ -55,8 +55,8 @@ def overlap_modify(file_path='gross_name.csv', raw_path='gross_features.csv', ad
         fore_part = raw_data[0:index[0] * 8, :]
         end_part = raw_data[index[0] * 8 + 8:, :]
 
-        fore_part = add_modify(file_path=name_path, raw_path=feature_path, data=fore_part, add_data=add_data)
-        fore_part = add_modify(file_path=name_path, raw_path=feature_path, data=fore_part, add_data=end_part)
+        fore_part = add_modify(file_path=file_path, raw_path=raw_path, data=fore_part, add_data=add_data)
+        fore_part = add_modify(file_path=file_path, raw_path=raw_path, data=fore_part, add_data=end_part)
 
         column = fore_part.shape[1]
         for idx in range(column - 1, 0, -1):

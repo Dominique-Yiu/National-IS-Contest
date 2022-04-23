@@ -18,8 +18,12 @@ def normalize(x, y, c):
 
 
 class pattern_match:
-    def __init__(self, path):
-        self.data = np.loadtxt(path, delimiter=',')
+    def __init__(self, path=None, data=None, number=None):
+        if path is None:
+            self.data = data
+        else:
+            self.data = np.loadtxt(path, delimiter=',')
+        self.number = number * 5
         self.length = len(self.data)
         self.start_point = []
         self.new_start = []
@@ -58,7 +62,8 @@ class pattern_match:
         max_value_axis_1 = np.max(c_gross, 1)
 
         sorted_max_index = np.argsort(max_value_axis_1)
-        selected_index = sorted_max_index[-21:-1]
+        '''Attention'''
+        selected_index = sorted_max_index[-1 - self.number:-1]
 
         for item in selected_index:
             self.start_point.append(x_coordinate[item][0])
