@@ -12,11 +12,11 @@ import pickle
 
 
 class one_class_svm:
-    def __init__(self, train_path, test_path=None, nu=0.1, kernel="rbf", gamma=0.1, test_size=0.3, random_state=2021):
+    def __init__(self, train_path='gross_features.csv', test_path=None, nu=0.1, kernel="rbf", gamma=0.1, test_size=0.3, random_state=2021):
         self.train_path = train_path
         self.test_path = test_path
         self.df = pd.read_csv(self.train_path)
-        self.clf = svm.OneClassSVM(nu=0.1, kernel=kernel, gamma=gamma)
+        self.clf = svm.OneClassSVM(nu=nu, kernel=kernel, gamma=gamma)
         self.x_train, self.x_valid = train_test_split(self.df, test_size=test_size, random_state=random_state)
 
     def train_(self):

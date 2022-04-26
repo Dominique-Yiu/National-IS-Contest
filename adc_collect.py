@@ -32,7 +32,7 @@ class collect_data:
         for i in range(3):
             print(f"\r{3 - i} seconds later, start collecting.", end="")
             time.sleep(1)
-        print('\nStart collecting average intensity of environment magnetic field.', end="")
+        print('\nStart collecting average intensity of environment magnetic field.')
         average_series_length = m_time * 2302
         average_series = np.zeros(average_series_length)
         for i in range(average_series_length):
@@ -47,13 +47,13 @@ class collect_data:
         self.env_intensity = result
         print('Calculate Complete.', f'the average intensity is {result}')
 
-    def get_rhythm_number(self):
+    def get_rhythm_number(self, enveloped_data):
         env_threshold = self.env_intensity * 0.9
         last_status = False
         status = last_status
         rhythm_number = 0
 
-        for item in self.filter.filtered_data:
+        for item in enveloped_data:
             if item < env_threshold:
                 last_status = status
                 status = True

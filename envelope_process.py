@@ -18,9 +18,9 @@ class envelope:
         self.n = n
 
         # pre-allocate space for results
-        if self.raw_data.shape[0] == 1:  # change the raw vector into column vector
-            self.raw_data = self.raw_data.reshape(-1, 1)
-            self.nx = self.raw_data.shape[0]
+        self.raw_data = self.raw_data.reshape(-1, 1)
+        self.nx = self.raw_data.shape[0]
+
         self.y_upper = np.zeros(self.raw_data.shape, dtype=type(self.raw_data))
         self.y_lower = np.zeros(self.raw_data.shape, dtype=type(self.raw_data))
 
