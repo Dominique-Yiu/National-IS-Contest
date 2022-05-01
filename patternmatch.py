@@ -53,7 +53,7 @@ class pattern_match:
         c_gross = []
         for idx in range(0, self.length - 2500, 100):
             x_coordinate.append([item for item in range(idx, idx + 2500)])
-            y_coordinate = self.data[x_coordinate[-1]]
+            y_coordinate = np.squeeze(self.data[x_coordinate[-1]])
             c = np.correlate(self.L, y_coordinate, 'full')
             c = normalize(self.L, y_coordinate, c)
             c_gross.append(c)
@@ -66,7 +66,7 @@ class pattern_match:
         selected_index = sorted_max_index[-1 - self.number:-1]
 
         for item in selected_index:
-            self.start_point.append(x_coordinate[item][0])
+            self.start_point.append(np.array(x_coordinate)[item][0])
         self.start_point = np.sort(self.start_point)
 
         avg = []
@@ -93,7 +93,7 @@ class pattern_match:
         min_index = np.argsort(y_coordinate, 1)[:, 0]
         modify_start_point_avg = []
         for idx, it in enumerate(min_index):
-            modify_start_point_avg.append(x_coordinate[idx][it])
+            modify_start_point_avg.append(int(np.array(x_coordinate)[idx][it]))
         # unique
         modify_start_point_avg = list(dict.fromkeys(modify_start_point_avg))
 
