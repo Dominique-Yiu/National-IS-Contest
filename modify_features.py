@@ -35,10 +35,12 @@ def add_modify(file_path='gross_name.csv', raw_path='gross_features.csv', data=N
         result = np.zeros((raw_data.shape[0] + add_data.shape[0], column))
         result[0:raw_data.shape[0], 0:raw_data.shape[1]] = raw_data
         result[raw_data.shape[0]:, 0:add_data.shape[1]] = add_data
-    if data is None:
+    if data is None and add_name is not None:
         name_list = np.append(name_list, add_name)
         np.savetxt(raw_path, result)
         np.savetxt(file_path, name_list, fmt='%s')
+    elif data is None and add_name is None:
+        np.savetxt(raw_path, result)
     else:
         return result
 
@@ -64,6 +66,12 @@ def overlap_modify(file_path='gross_name.csv', raw_path='gross_features.csv', ad
                 fore_part = np.delete(fore_part, idx, axis=1)
         np.savetxt(raw_path, fore_part)
 
+
+def process_features(data):
+    length = len(data)
+    for idx in range(length):
+        data[idx][np.where(data[idx] == 0)[0]] = data[idx][1]
+    return data
 
 # data_1 = np.random.randint(1, 20, (8, 10))
 # data_2 = np.random.randint(1, 20, (8, 7))

@@ -3,6 +3,48 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\LXY_3.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\LXY_6.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\LXY_7.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\MS_3.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\MS_7.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\features.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\gross_features.csv">
           <value>
             <Attribute>
@@ -17,13 +59,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\new\FIVELXY1\FIVELXY1_1.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\standard_value.csv">
           <value>
             <Attribute>
@@ -31,7 +66,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\ycw\ycw_1.csv">
+        <entry key="\three\LXY_两快一慢\LXY_01.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

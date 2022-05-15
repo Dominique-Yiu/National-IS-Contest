@@ -48,7 +48,7 @@ class collect_data:
         print('Calculate Complete.', f'the average intensity is {result}')
 
     def get_rhythm_number(self, enveloped_data):
-        env_threshold = self.env_intensity * 0.9
+        env_threshold = self.env_intensity * 0.75
         last_status = False
         status = last_status
         rhythm_number = 0

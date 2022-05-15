@@ -14,12 +14,13 @@ import threading
 from modify_features import *
 import serial
 import serial.tools.list_ports
+import matplotlib.pyplot as plt
 
 
 def get_features(collector: collect_data):
-    filtered_data = collector.start(m_time=20)
-    filtered_data = filtered_data[int(2302 * 1):]
+    filtered_data = collector.start(m_time=15)
     upper, _ = envelope(filtered_data, 100).start()
+    upper = upper[int(2302 * 1):-int(2302 * 0.5)]
     # np.savetxt('filtered_data.csv', upper)
     rhythm_number = collector.get_rhythm_number(enveloped_data=upper)
     end_points, _ = window_var(data=upper, head=rhythm_number).start()
@@ -61,6 +62,7 @@ class process_data_thread(QThread):
             features = get_features(self.collector)
             gross_data.append(features)
         gross_data = np.array(gross_data)
+        gross_data = process_features(gross_data)
         add_modify(add_data=gross_data, add_name=self.name)
         self.classify.train_()
 
@@ -227,6 +229,7 @@ class operate(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def display_collect_data(self, cnt):
         self.textBrowser_2.append(f"正在进行第{cnt + 1}次数据录入：")
+        self.progressBar.setProperty("value", 12.5 * (cnt + 1))
 
     def display_authenticate_result(self, result):
         if result == -1:
