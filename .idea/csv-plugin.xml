@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\filtered_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\gross_features.csv">
           <value>
             <Attribute>

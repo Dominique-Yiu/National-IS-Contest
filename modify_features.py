@@ -1,4 +1,5 @@
 import numpy as np
+measure_cnt = 8
 
 
 # %%
@@ -11,12 +12,14 @@ def delete_modify(file_path='gross_name.csv', raw_path='gross_features.csv', del
         return None
     else:
         name_list = np.delete(name_list, index[0], axis=0)
-        for _ in range(8):
-            raw_data = np.delete(raw_data, index[0] * 8, axis=0)
+        for _ in range(measure_cnt):
+            raw_data = np.delete(raw_data, index[0] * measure_cnt, axis=0)
         column = raw_data.shape[1]
         for idx in range(column - 1, 0, -1):
             if ~np.any(raw_data[:, idx]):
                 raw_data = np.delete(raw_data, idx, axis=1)
+            else:
+                break
         np.savetxt(file_path, name_list, fmt='%s')
         np.savetxt(raw_path, raw_data)
 
@@ -54,8 +57,8 @@ def overlap_modify(file_path='gross_name.csv', raw_path='gross_features.csv', ad
         print('The user name does not exist.')
         return None
     else:
-        fore_part = raw_data[0:index[0] * 8, :]
-        end_part = raw_data[index[0] * 8 + 8:, :]
+        fore_part = raw_data[0:index[0] * measure_cnt, :]
+        end_part = raw_data[index[0] * measure_cnt + measure_cnt:, :]
 
         fore_part = add_modify(file_path=file_path, raw_path=raw_path, data=fore_part, add_data=add_data)
         fore_part = add_modify(file_path=file_path, raw_path=raw_path, data=fore_part, add_data=end_part)
@@ -67,16 +70,10 @@ def overlap_modify(file_path='gross_name.csv', raw_path='gross_features.csv', ad
         np.savetxt(raw_path, fore_part)
 
 
-def process_features(data):
-    length = len(data)
-    for idx in range(length):
-        data[idx][np.where(data[idx] == 0)[0]] = data[idx][1]
-    return data
-
-# data_1 = np.random.randint(1, 20, (8, 10))
-# data_2 = np.random.randint(1, 20, (8, 7))
-# data_3 = np.random.randint(1, 20, (8, 5))
-# data_4 = np.random.randint(1, 20, (8, 15))
+# data_1 = np.random.randint(1, 20, (measure_cnt, 10))
+# data_2 = np.random.randint(1, 20, (measure_cnt, 7))
+# data_3 = np.random.randint(1, 20, (measure_cnt, 5))
+# data_4 = np.random.randint(1, 20, (measure_cnt, 15))
 # add_modify(data=None, add_data=data_3, add_name='Mike')
 # add_modify(data=None, add_data=data_1, add_name='Bob')
 # add_modify(data=None, add_data=data_2, add_name='Sally')

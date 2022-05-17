@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>361</width>
-    <height>625</height>
+    <width>423</width>
+    <height>672</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -164,8 +164,8 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>335</width>
-         <height>129</height>
+         <width>397</width>
+         <height>150</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
@@ -196,6 +196,13 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButton_7">
+          <property name="text">
+           <string>串口绘图器</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -207,8 +214,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>361</width>
-     <height>22</height>
+     <width>423</width>
+     <height>23</height>
     </rect>
    </property>
   </widget>

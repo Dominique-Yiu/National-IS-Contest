@@ -3,7 +3,7 @@ import time
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5 import QtWidgets
 from PyQt5.Qt import QThread, pyqtSignal
-from UI import Ui_MainWindow
+from UI import Ui_MainWindow, plot_window, plot_collector
 from adc_collect import collect_data
 from envelope_process import envelope
 from classifier import one_class_svm
@@ -14,22 +14,28 @@ import threading
 from modify_features import *
 import serial
 import serial.tools.list_ports
+from encrypt import encrypt
 import matplotlib.pyplot as plt
 
 
 def get_features(collector: collect_data):
-    filtered_data = collector.start(m_time=15)
-    upper, _ = envelope(filtered_data, 100).start()
-    upper = upper[int(2302 * 1):-int(2302 * 0.5)]
-    # np.savetxt('filtered_data.csv', upper)
-    rhythm_number = collector.get_rhythm_number(enveloped_data=upper)
-    end_points, _ = window_var(data=upper, head=rhythm_number).start()
-    end_points = np.sort(end_points)
-    end_points = end_points[1::2]
-    start_points = pattern_match(data=upper, number=rhythm_number).start()
-    start_points = np.array(start_points)
-    features = np.append(end_points, start_points)
-    features = np.sort(features) - features.min()
+    while True:
+        filtered_data = collector.start(m_time=13)
+        upper, _ = envelope(filtered_data, 100).start()
+        upper = upper[int(2302 * 1):-int(2302 * 0.5)]
+        # np.savetxt('filtered_data.csv', upper)
+        rhythm_number = collector.get_rhythm_number(enveloped_data=upper)
+        end_points, _ = window_var(data=upper, head=rhythm_number).start()
+        end_points = np.sort(end_points)
+        end_points = end_points[1::2]
+        start_points = pattern_match(data=upper, number=rhythm_number).start()
+        start_points = np.array(start_points)
+        features = np.append(end_points, start_points)
+        features = np.sort(features) - features.min()
+        if len(features) == rhythm_number * 2:
+            break
+        else:
+            print('重新输入。')
 
     return features
 
@@ -57,14 +63,13 @@ class process_data_thread(QThread):
 
     def run(self):
         gross_data = []
-        for idx in range(8):
+        for idx in range(measure_cnt):
             self.signal.emit(idx)
             features = get_features(self.collector)
             gross_data.append(features)
         gross_data = np.array(gross_data)
-        gross_data = process_features(gross_data)
         add_modify(add_data=gross_data, add_name=self.name)
-        self.classify.train_()
+        self.signal.emit(10)
 
 
 class certificate_user_thread(QThread):
@@ -106,7 +111,7 @@ class modify_rythem_thread(QThread):
     def run(self):
         # collect new data
         gross_data = []
-        for idx in range(8):
+        for idx in range(measure_cnt):
             self.signal.emit(idx)
             features = get_features(self.collector)
             gross_data.append(features)
@@ -117,7 +122,9 @@ class modify_rythem_thread(QThread):
 class operate(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(operate, self).__init__()
+        self.newWindow = None
         self.setupUi(self)
+        self.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
 
         self.Com_Dict = {}
         self.port_list = list(serial.tools.list_ports.comports())
@@ -138,13 +145,18 @@ class operate(QtWidgets.QMainWindow, Ui_MainWindow):
         self.name_list = np.loadtxt('gross_name.csv', dtype=str).reshape(-1)
         self.raw_data = np.loadtxt('gross_features.csv')
 
+        self.encrypt = encrypt()
+
     #   Slut function
     '''Root user authenticate'''
 
     def manage_certificate(self):
-        pin = np.loadtxt("pin.txt", dtype=str)
+        with open("pin.txt", "rb") as f:
+            pin = f.read()
+        dec_pin = self.encrypt.decryption(pin)
         pin_enter = self.lineEdit.text()
-        if pin == pin_enter:
+        bytes_pin_enter = pin_enter.encode('UTF-8')
+        if dec_pin == bytes_pin_enter:
             self.judge = True
 
         if not self.judge:
@@ -220,6 +232,19 @@ class operate(QtWidgets.QMainWindow, Ui_MainWindow):
     def port_changed(self):
         self.textBrowser_3.append("串口改变")
 
+    '''Plot series'''
+
+    def plot_series(self):
+        if self.pushButton_7.text() == '串口绘图器':
+            self.pushButton_7.setText('关闭绘图器')
+            plot_collector.ser.open()
+            self.newWindow = plot_window()
+            self.newWindow.show()
+        else:
+            self.pushButton_7.setText('串口绘图器')
+            self.newWindow.close()
+            plot_collector.ser.close()
+
     #   Connecting function
 
     def display_env_intensity(self, intensity):
@@ -228,8 +253,12 @@ class operate(QtWidgets.QMainWindow, Ui_MainWindow):
         self.textBrowser_3.append(str(intensity))
 
     def display_collect_data(self, cnt):
-        self.textBrowser_2.append(f"正在进行第{cnt + 1}次数据录入：")
-        self.progressBar.setProperty("value", 12.5 * (cnt + 1))
+        if cnt == 10:
+            self.classify.train_()
+            self.textBrowser_2.append('训练完成！')
+        else:
+            self.textBrowser_2.append(f"正在进行第{cnt + 1}次数据录入：")
+            self.progressBar.setProperty("value", 12.5 * (cnt + 1))
 
     def display_authenticate_result(self, result):
         if result == -1:
@@ -239,9 +268,11 @@ class operate(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def display_delete_info(self):
         self.textBrowser_2.append('删除成功.')
+        self.classify.train_()
 
     def display_modify_info(self):
         self.textBrowser_2.append('重置成功.')
+        self.classify.train_()
 
 
 if __name__ == '__main__':
