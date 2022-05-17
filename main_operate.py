@@ -243,7 +243,6 @@ class operate(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             self.pushButton_7.setText('串口绘图器')
             self.newWindow.close()
-            plot_collector.ser.close()
 
     #   Connecting function
 

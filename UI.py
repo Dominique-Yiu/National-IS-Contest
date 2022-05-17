@@ -195,7 +195,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
         MyMplCanvas.__init__(self, *args, **kwargs)
         timer = QtCore.QTimer(self)
         timer.timeout.connect(self.update_figure)
-        timer.start(150)
+        timer.start(50)
 
     def compute_initial_figure(self):
         show_data = get_value()
@@ -224,6 +224,7 @@ class plot_window(QWidget):
         reply = QtWidgets.QMessageBox.question(self, '警告', '退出后测试将停止,你确认要退出吗？', QtWidgets.QMessageBox.Yes,
                                                QtWidgets.QMessageBox.No)
         if reply == QtWidgets.QMessageBox.Yes:
+            plot_collector.ser.close()
             event.accept()
         else:
             event.ignore()
@@ -233,15 +234,16 @@ from adc_collect import collect_data
 
 plot_collector = collect_data(port='COM3')
 
-
+plot_data = np.zeros(100)
 def get_value():
-    show_data = np.zeros(100)
-    for i in range(100):
+    # show_data = np.zeros(100)
+    plot_data[:95] = plot_data[5:]
+    for i in range(5):
         try:
-            show_data[i] = plot_collector.ser.readline()
+            plot_data[i + 95] = plot_collector.ser.readline()
         except:
             pass
-    return show_data
+    return plot_data
 
 # if __name__ == "__main__":
 #         app = QApplication(sys.argv)
