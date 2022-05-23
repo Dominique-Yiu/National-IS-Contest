@@ -36,6 +36,7 @@ def get_features(collector: collect_data):
             break
         else:
             print('重新输入。')
+            time.sleep(3)
 
     return features
 

@@ -11,7 +11,10 @@
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema" qname="yiu" />
+          <node kind="schema">
+            <name qname="yiu" />
+            <name qname="shiyan" />
+          </node>
         </introspection-scope>
       </schema-mapping>
     </data-source>

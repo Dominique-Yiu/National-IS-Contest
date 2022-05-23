@@ -21,11 +21,15 @@ Q
 MS_7.csv,a\2\a2ca7237d2c78ce84cefbd370cac50936edb6947
 >
 gross_name.csv,6\5\651297ec7e324e24877d07343e4ec2b62f7941db
->
-adc_collect.py,3\f\3fdc1dd8dacecf467c6a9766ec060381b1cd01da
 B
 gross_features.csv,8\8\882901189111591819664b05eb055f224781b034
 A
 filtered_data.csv,8\d\8d5957737d2735d7f6a50e7c16b8fd5e4afc8a52
 <
 features.csv,2\1\212f31c6324bb23eb30e00ee2e835a67d23b4e73
+5
+UI.py,d\1\d181e873593f670ca724d4ee5cd55b688c02ce71
+>
+adc_collect.py,3\f\3fdc1dd8dacecf467c6a9766ec060381b1cd01da
+<
+read_data.py,8\f\8fdfbc8c33e0e453ec4a9f7fb0a51e74ab45ba17

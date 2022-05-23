@@ -1,0 +1,36 @@
+
+_python:S2208"GImport only needed names or import the module and then use its members.(†ÄÅ¼
+dpython:S2208"GImport only needed names or import the module and then use its members.(ë°ÜÁûÿÿÿÿ
+_python:S2208"GImport only needed names or import the module and then use its members.(†ÄÅ¼
+_python:S2208"GImport only needed names or import the module and then use its members.(¾ß€š
+kpython:S116-"TRename this field "pushButton_4" to match the regular expression ^[_a-z][_a-z0-9]*$.(óùĞ¯
+ppython:S116"TRename this field "gridLayout_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(äûèìùÿÿÿÿ
+kpython:S116g"TRename this field "pushButton_6" to match the regular expression ^[_a-z][_a-z0-9]*$.(¿ò˜˜
+ipython:S1169"RRename this field "comboBox_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(ˆş””
+mpython:S116"QRename this field "tabWidget" to match the regular expression ^[_a-z][_a-z0-9]*$.(ß˜ÉÌÿÿÿÿÿ
+ppython:S116B"TRename this field "pushButton_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ËÚìøÿÿÿÿ
+qpython:S116N"URename this field "textBrowser_4" to match the regular expression ^[_a-z][_a-z0-9]*$.(½Ç³Êùÿÿÿÿ
+npython:S116a"RRename this field "comboBox_4" to match the regular expression ^[_a-z][_a-z0-9]*$.(”µœıÿÿÿÿÿ
+npython:S116S"RRename this field "scrollArea" to match the regular expression ^[_a-z][_a-z0-9]*$.(£ñÊšøÿÿÿÿ
+qpython:S116["URename this field "textBrowser_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ØÛí’ùÿÿÿÿ
+hpython:S1163"RRename this field "lineEdit_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(‡üB
+kpython:S116d"TRename this field "pushButton_5" to match the regular expression ^[_a-z][_a-z0-9]*$.(®ı”Ã
+opython:S116)"SRename this field "progressBar" to match the regular expression ^[_a-z][_a-z0-9]*$.(Ú×Ôıÿÿÿÿ
+kpython:S116Y"TRename this field "gridLayout_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(Ñ¦â
+ppython:S116j"TRename this field "pushButton_7" to match the regular expression ^[_a-z][_a-z0-9]*$.(¿®ĞÎùÿÿÿÿ
+ipython:S116?"RRename this field "pushButton" to match the regular expression ^[_a-z][_a-z0-9]*$.(îâØ
+qpython:S116E"URename this field "textBrowser_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(ä¡‡ãşÿÿÿÿ
+|python:S116V"`Rename this field "scrollAreaWidgetContents" to match the regular expression ^[_a-z][_a-z0-9]*$.(„Ûª÷şÿÿÿÿ
+lpython:S1166"PRename this field "lineEdit" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÁüŸÑşÿÿÿÿ
+hpython:S116"RRename this field "gridLayout" to match the regular expression ^[_a-z][_a-z0-9]*$.(£©Ûa
+ppython:S116K"TRename this field "pushButton_2" to match the regular expression ^[_a-z][_a-z0-9]*$.(®ğĞÕûÿÿÿÿ
+ipython:S116#"RRename this field "comboBox_3" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÜÔæ¦
+jpython:S116"SRename this field "textBrowser" to match the regular expression ^[_a-z][_a-z0-9]*$.(­ö¯Û
+ƒpython:S101"gRename class "Ui_MainWindow" to match the regular expression ^_?([A-Z_][a-zA-Z0-9]*|[a-z_][a-z0-9_]*)$.( Ìñıùÿÿÿÿ
+rpython:S117"VRename this parameter "MainWindow" to match the regular expression ^[_a-z][a-z0-9_]*$.(ÂéÇ´ÿÿÿÿÿ
+gpython:S100"KRename method "setupUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÂéÇ´ÿÿÿÿÿ
+spython:S117…"VRename this parameter "MainWindow" to match the regular expression ^[_a-z][a-z0-9_]*$.(”«Àşÿÿÿÿ
+npython:S100…"QRename method "retranslateUi" to match the regular expression ^[a-z_][a-z0-9_]*$.(”«Àşÿÿÿÿ
+Cpython:S125ï"Remove this commented out code.(ñÖ²ùıÿÿÿÿ8ÆÚ²‘0
+Upython:S5754ô"<Specify an exception class to catch or reraise the exception(ˆÊÉ·
+7python:S125ø"Remove this commented out code.(Ê·ó¥

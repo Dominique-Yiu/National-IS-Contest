@@ -1,7 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="MySQL - @localhost">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.38">
-    <root id="1"/>
+    <root id="1">
+      <DefaultCasing>lower/lower</DefaultCasing>
+      <DefaultEngine>InnoDB</DefaultEngine>
+      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+      <Grants>|root||root|localhost|ALTER|G
+|root||yiu|localhost|ALTER|G
+|root||root|localhost|ALTER ROUTINE|G
+|root||yiu|localhost|ALTER ROUTINE|G
+|root||root|localhost|APPLICATION_PASSWORD_ADMIN|G
+|root||yiu|localhost|APPLICATION_PASSWORD_ADMIN|G
+|root||mysql.infoschema|localhost|AUDIT_ABORT_EXEMPT|G
+|root||mysql.session|localhost|AUDIT_ABORT_EXEMPT|G
+|root||mysql.sys|localhost|AUDIT_ABORT_EXEMPT|G
+|root||root|localhost|AUDIT_ABORT_EXEMPT|G
+|root||yiu|localhost|AUDIT_ABORT_EXEMPT|G
+|root||root|localhost|AUDIT_ADMIN|G
+|root||yiu|localhost|AUDIT_ADMIN|G
+|root||root|localhost|AUTHENTICATION_POLICY_ADMIN|G
+|root||yiu|localhost|AUTHENTICATION_POLICY_ADMIN|G
+|root||mysql.session|localhost|BACKUP_ADMIN|G
+|root||root|localhost|BACKUP_ADMIN|G
+|root||yiu|localhost|BACKUP_ADMIN|G
+|root||root|localhost|BINLOG_ADMIN|G
+|root||yiu|localhost|BINLOG_ADMIN|G
+|root||root|localhost|BINLOG_ENCRYPTION_ADMIN|G
+|root||yiu|localhost|BINLOG_ENCRYPTION_ADMIN|G
+|root||mysql.session|localhost|CLONE_ADMIN|G
+|root||root|localhost|CLONE_ADMIN|G
+|root||yiu|localhost|CLONE_ADMIN|G
+|root||mysql.session|localhost|CONNECTION_ADMIN|G
+|root||root|localhost|CONNECTION_ADMIN|G
+|root||yiu|localhost|CONNECTION_ADMIN|G
+|root||root|localhost|CREATE|G
+|root||yiu|localhost|CREATE|G
+|root||root|localhost|CREATE ROLE|G
+|root||yiu|localhost|CREATE ROLE|G
+|root||root|localhost|CREATE ROUTINE|G
+|root||yiu|localhost|CREATE ROUTINE|G
+|root||root|localhost|CREATE TABLESPACE|G
+|root||yiu|localhost|CREATE TABLESPACE|G
+|root||root|localhost|CREATE TEMPORARY TABLES|G
+|root||yiu|localhost|CREATE TEMPORARY TABLES|G
+|root||root|localhost|CREATE USER|G
+|root||yiu|localhost|CREATE USER|G
+|root||root|localhost|CREATE VIEW|G
+|root||yiu|localhost|CREATE VIEW|G
+|root||root|localhost|DELETE|G
+|root||yiu|localhost|DELETE|G
+|root||root|localhost|DROP|G
+|root||yiu|localhost|DROP|G
+|root||root|localhost|DROP ROLE|G
+|root||yiu|localhost|DROP ROLE|G
+|root||root|localhost|ENCRYPTION_KEY_ADMIN|G
+|root||yiu|localhost|ENCRYPTION_KEY_ADMIN|G
+|root||root|localhost|EVENT|G
+|root||yiu|localhost|EVENT|G
+|root||root|localhost|EXECUTE|G
+|root||yiu|localhost|EXECUTE|G
+|root||root|localhost|FILE|G
+|root||yiu|localhost|FILE|G
+|root||root|localhost|FLUSH_OPTIMIZER_COSTS|G
+|root||yiu|localhost|FLUSH_OPTIMIZER_COSTS|G
+|root||root|localhost|FLUSH_STATUS|G
+|root||yiu|localhost|FLUSH_STATUS|G
+|root||root|localhost|FLUSH_TABLES|G
+|root||yiu|localhost|FLUSH_TABLES|G
+|root||root|localhost|FLUSH_USER_RESOURCES|G
+|root||yiu|localhost|FLUSH_USER_RESOURCES|G
+|root||root|localhost|GROUP_REPLICATION_ADMIN|G
+|root||yiu|localhost|GROUP_REPLICATION_ADMIN|G
+|root||root|localhost|GROUP_REPLICATION_STREAM|G
+|root||yiu|localhost|GROUP_REPLICATION_STREAM|G
+|root||root|localhost|INDEX|G
+|root||yiu|localhost|INDEX|G
+|root||root|localhost|INNODB_REDO_LOG_ARCHIVE|G
+|root||yiu|localhost|INNODB_REDO_LOG_ARCHIVE|G
+|root||root|localhost|INNODB_REDO_LOG_ENABLE|G
+|root||yiu|localhost|INNODB_REDO_LOG_ENABLE|G
+|root||root|localhost|INSERT|G
+|root||yiu|localhost|INSERT|G
+|root||root|localhost|LOCK TABLES|G
+|root||yiu|localhost|LOCK TABLES|G
+|root||root|localhost|PASSWORDLESS_USER_ADMIN|G
+|root||yiu|localhost|PASSWORDLESS_USER_ADMIN|G
+|root||mysql.session|localhost|PERSIST_RO_VARIABLES_ADMIN|G
+|root||root|localhost|PERSIST_RO_VARIABLES_ADMIN|G
+|root||yiu|localhost|PERSIST_RO_VARIABLES_ADMIN|G
+|root||root|localhost|PROCESS|G
+|root||yiu|localhost|PROCESS|G
+|root||root|localhost|REFERENCES|G
+|root||yiu|localhost|REFERENCES|G
+|root||root|localhost|RELOAD|G
+|root||yiu|localhost|RELOAD|G
+|root||root|localhost|REPLICATION CLIENT|G
+|root||yiu|localhost|REPLICATION CLIENT|G
+|root||root|localhost|REPLICATION SLAVE|G
+|root||yiu|localhost|REPLICATION SLAVE|G
+|root||root|localhost|REPLICATION_APPLIER|G
+|root||yiu|localhost|REPLICATION_APPLIER|G
+|root||root|localhost|REPLICATION_SLAVE_ADMIN|G
+|root||yiu|localhost|REPLICATION_SLAVE_ADMIN|G
+|root||root|localhost|RESOURCE_GROUP_ADMIN|G
+|root||yiu|localhost|RESOURCE_GROUP_ADMIN|G
+|root||root|localhost|RESOURCE_GROUP_USER|G
+|root||yiu|localhost|RESOURCE_GROUP_USER|G
+|root||root|localhost|ROLE_ADMIN|G
+|root||yiu|localhost|ROLE_ADMIN|G
+|root||mysql.infoschema|localhost|SELECT|G
+|root||root|localhost|SELECT|G
+|root||yiu|localhost|SELECT|G
+|root||root|localhost|SERVICE_CONNECTION_ADMIN|G
+|root||yiu|localhost|SERVICE_CONNECTION_ADMIN|G
+|root||mysql.session|localhost|SESSION_VARIABLES_ADMIN|G
+|root||root|localhost|SESSION_VARIABLES_ADMIN|G
+|root||yiu|localhost|SESSION_VARIABLES_ADMIN|G
+|root||root|localhost|SET_USER_ID|G
+|root||yiu|localhost|SET_USER_ID|G
+|root||root|localhost|SHOW DATABASES|G
+|root||yiu|localhost|SHOW DATABASES|G
+|root||root|localhost|SHOW VIEW|G
+|root||yiu|localhost|SHOW VIEW|G
+|root||root|localhost|SHOW_ROUTINE|G
+|root||yiu|localhost|SHOW_ROUTINE|G
+|root||mysql.session|localhost|SHUTDOWN|G
+|root||root|localhost|SHUTDOWN|G
+|root||yiu|localhost|SHUTDOWN|G
+|root||mysql.session|localhost|SUPER|G
+|root||root|localhost|SUPER|G
+|root||yiu|localhost|SUPER|G
+|root||mysql.infoschema|localhost|SYSTEM_USER|G
+|root||mysql.session|localhost|SYSTEM_USER|G
+|root||mysql.sys|localhost|SYSTEM_USER|G
+|root||root|localhost|SYSTEM_USER|G
+|root||yiu|localhost|SYSTEM_USER|G
+|root||mysql.session|localhost|SYSTEM_VARIABLES_ADMIN|G
+|root||root|localhost|SYSTEM_VARIABLES_ADMIN|G
+|root||yiu|localhost|SYSTEM_VARIABLES_ADMIN|G
+|root||root|localhost|TABLE_ENCRYPTION_ADMIN|G
+|root||yiu|localhost|TABLE_ENCRYPTION_ADMIN|G
+|root||root|localhost|TRIGGER|G
+|root||yiu|localhost|TRIGGER|G
+|root||root|localhost|UPDATE|G
+|root||yiu|localhost|UPDATE|G
+|root||root|localhost|XA_RECOVER_ADMIN|G
+|root||yiu|localhost|XA_RECOVER_ADMIN|G
+|root||root|localhost|grant option|G
+performance_schema|schema||mysql.session|localhost|SELECT|G
+sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
+      <ServerVersion>8.0.28</ServerVersion>
+    </root>
     <collation id="2" parent="1" name="armscii8_general_ci">
       <Charset>armscii8</Charset>
       <DefaultForCharset>1</DefaultForCharset>
@@ -860,7 +1009,6 @@
       <Charset>utf8mb4</Charset>
     </collation>
     <schema id="274" parent="1" name="hnu">
-      <Current>1</Current>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="275" parent="1" name="information_schema">
@@ -960,377 +1108,559 @@ student||4|U2|localhost|UPDATE|G
 student|||U1|localhost|grant option|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <user id="280" parent="1" name="mysql.infoschema">
+    <schema id="280" parent="1" name="databaselab">
+      <Current>1</Current>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="281" parent="1" name="logindemo">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="282" parent="1" name="logindemologindemo">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="283" parent="1" name="shiyan">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <user id="284" parent="1" name="mysql.infoschema">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="281" parent="1" name="mysql.session">
+    <user id="285" parent="1" name="mysql.session">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="282" parent="1" name="mysql.sys">
+    <user id="286" parent="1" name="mysql.sys">
+      <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="283" parent="1" name="root">
+    <user id="287" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <user id="284" parent="1" name="yiu">
+    <user id="288" parent="1" name="yiu">
       <Host>localhost</Host>
     </user>
-    <user id="285" parent="1" name="ly"/>
-    <user id="286" parent="1" name="wn"/>
-    <user id="287" parent="1" name="lx"/>
-    <user id="288" parent="1" name="yl"/>
-    <user id="289" parent="1" name="zp"/>
-    <user id="290" parent="1" name="zx"/>
-    <user id="291" parent="1" name="U1">
+    <user id="289" parent="1" name="ly"/>
+    <user id="290" parent="1" name="wn"/>
+    <user id="291" parent="1" name="lx"/>
+    <user id="292" parent="1" name="yl"/>
+    <user id="293" parent="1" name="zp"/>
+    <user id="294" parent="1" name="zx"/>
+    <user id="295" parent="1" name="U1">
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
       <RoleGrants>R1!
 </RoleGrants>
     </user>
-    <user id="292" parent="1" name="U2">
+    <user id="296" parent="1" name="U2">
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="293" parent="1" name="R1"/>
-    <routine id="294" parent="279" name="grant_select_on_table_to_public">
+    <user id="297" parent="1" name="R1">
+      <CanLogin>0</CanLogin>
+    </user>
+    <routine id="298" parent="279" name="grant_select_on_table_to_public">
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
       <SourceTextLength>797</SourceTextLength>
     </routine>
-    <routine id="295" parent="279" name="grant_select_staffview_to_public">
+    <routine id="299" parent="279" name="grant_select_staffview_to_public">
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
       <SourceTextLength>569</SourceTextLength>
     </routine>
-    <table id="296" parent="279" name="class">
+    <table id="300" parent="279" name="class">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="297" parent="279" name="department">
+    <table id="301" parent="279" name="department">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="298" parent="279" name="dept">
+    <table id="302" parent="279" name="dept">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="299" parent="279" name="female">
+    <table id="303" parent="279" name="female">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="300" parent="279" name="male">
+    <table id="304" parent="279" name="male">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="301" parent="279" name="staff">
+    <table id="305" parent="279" name="staff">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="302" parent="279" name="staff1">
+    <table id="306" parent="279" name="staff1">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="303" parent="279" name="student">
+    <table id="307" parent="279" name="stu">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <view id="304" parent="279" name="department_salary">
+    <table id="308" parent="279" name="student">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="309" parent="279" name="teacher">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <view id="310" parent="279" name="department_salary">
       <Definer>root@localhost</Definer>
       <SourceTextLength>324</SourceTextLength>
     </view>
-    <view id="305" parent="279" name="staff_view">
+    <view id="311" parent="279" name="staff_view">
       <Definer>root@localhost</Definer>
       <SourceTextLength>287</SourceTextLength>
     </view>
-    <view id="306" parent="279" name="vsp">
+    <view id="312" parent="279" name="vsp">
       <Definer>root@localhost</Definer>
       <SourceTextLength>196</SourceTextLength>
     </view>
-    <column id="307" parent="296" name="Cclassno">
+    <table id="313" parent="283" name="course">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="314" parent="283" name="department">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="315" parent="283" name="stu">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="316" parent="283" name="teacher">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="317" parent="300" name="Cclassno">
       <DataType>char(10)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="308" parent="296" name="Cclassname">
+    <column id="318" parent="300" name="Cclassname">
       <DataType>char(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="309" parent="296" name="Cteacher">
+    <column id="319" parent="300" name="Cteacher">
       <DataType>char(10)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="310" parent="296" name="Cmonitor">
+    <column id="320" parent="300" name="Cmonitor">
       <DataType>char(10)|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="311" parent="296" name="PRIMARY">
+    <key id="321" parent="300" name="PRIMARY">
       <ColNames>Cclassno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="312" parent="297" name="Ddeptno">
+    <column id="322" parent="301" name="Ddeptno">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="313" parent="297" name="Dname">
+    <column id="323" parent="301" name="Dname">
       <DataType>char(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="314" parent="297" name="Dmanager">
+    <column id="324" parent="301" name="Dmanager">
       <DataType>char(20)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="315" parent="297" name="Daddress">
+    <column id="325" parent="301" name="Daddress">
       <DataType>char(20)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="316" parent="297" name="Dtelephone">
+    <column id="326" parent="301" name="Dtelephone">
       <DataType>char(11)|0s</DataType>
       <Position>5</Position>
     </column>
-    <key id="317" parent="297" name="PRIMARY">
+    <key id="327" parent="301" name="PRIMARY">
       <ColNames>Ddeptno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="318" parent="298" name="Dno">
+    <column id="328" parent="302" name="Dno">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="319" parent="298" name="Dname">
+    <column id="329" parent="302" name="Dname">
       <DataType>char(10)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="320" parent="298" name="Dmanager">
+    <column id="330" parent="302" name="Dmanager">
       <DataType>char(10)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="321" parent="298" name="Dtel">
+    <column id="331" parent="302" name="Dtel">
       <DataType>char(12)|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="322" parent="298" name="PRIMARY">
+    <key id="332" parent="302" name="PRIMARY">
       <ColNames>Dno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="323" parent="299" name="Fno">
+    <column id="333" parent="303" name="Fno">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="324" parent="299" name="Fname">
+    <column id="334" parent="303" name="Fname">
       <DataType>varchar(10)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="325" parent="299" name="Fage">
+    <column id="335" parent="303" name="Fage">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="326" parent="299" name="Fjob">
+    <column id="336" parent="303" name="Fjob">
       <DataType>varchar(50)|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="327" parent="299" name="PRIMARY">
+    <key id="337" parent="303" name="PRIMARY">
       <ColNames>Fno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <trigger id="328" parent="299" name="check_female">
+    <trigger id="338" parent="303" name="check_female">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>405</SourceTextLength>
       <Turn>after-row</Turn>
     </trigger>
-    <column id="329" parent="300" name="Mno">
+    <column id="339" parent="304" name="Mno">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="330" parent="300" name="Mname">
+    <column id="340" parent="304" name="Mname">
       <DataType>varchar(10)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="331" parent="300" name="Mage">
+    <column id="341" parent="304" name="Mage">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="332" parent="300" name="Mjob">
+    <column id="342" parent="304" name="Mjob">
       <DataType>varchar(50)|0s</DataType>
       <Position>4</Position>
     </column>
-    <key id="333" parent="300" name="PRIMARY">
+    <key id="343" parent="304" name="PRIMARY">
       <ColNames>Mno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <trigger id="334" parent="300" name="check_male">
+    <trigger id="344" parent="304" name="check_male">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>405</SourceTextLength>
       <Turn>after-row</Turn>
     </trigger>
-    <column id="335" parent="301" name="Sno">
+    <column id="345" parent="305" name="Sno">
       <DataType>char(9)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="336" parent="301" name="Sname">
+    <column id="346" parent="305" name="Sname">
       <DataType>char(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="337" parent="301" name="Sage">
+    <column id="347" parent="305" name="Sage">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="338" parent="301" name="Stitle">
+    <column id="348" parent="305" name="Stitle">
       <DataType>char(10)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="339" parent="301" name="Ssalary">
+    <column id="349" parent="305" name="Ssalary">
       <DataType>int|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="340" parent="301" name="Sdeptno">
+    <column id="350" parent="305" name="Sdeptno">
       <DataType>int|0s</DataType>
       <Position>6</Position>
     </column>
-    <foreign-key id="341" parent="301" name="staff_ibfk_1">
+    <foreign-key id="351" parent="305" name="staff_ibfk_1">
       <ColNames>Sdeptno</ColNames>
       <RefColNames>Ddeptno</RefColNames>
       <RefTableName>department</RefTableName>
     </foreign-key>
-    <index id="342" parent="301" name="Sdeptno">
+    <index id="352" parent="305" name="Sdeptno">
       <ColNames>Sdeptno</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="343" parent="301" name="PRIMARY">
+    <key id="353" parent="305" name="PRIMARY">
       <ColNames>Sno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <check id="344" parent="302" name="con1">
+    <check id="354" parent="306" name="con1">
       <Predicate>`Sage` &lt;= 60</Predicate>
     </check>
-    <column id="345" parent="302" name="Sno">
+    <column id="355" parent="306" name="Sno">
       <DataType>char(9)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="346" parent="302" name="Sname">
+    <column id="356" parent="306" name="Sname">
       <DataType>char(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="347" parent="302" name="Sage">
+    <column id="357" parent="306" name="Sage">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="348" parent="302" name="Stitle">
+    <column id="358" parent="306" name="Stitle">
       <DataType>char(10)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="349" parent="302" name="Ssalary">
+    <column id="359" parent="306" name="Ssalary">
       <DataType>int|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="350" parent="302" name="Sdeptno">
+    <column id="360" parent="306" name="Sdeptno">
       <DataType>int|0s</DataType>
       <Position>6</Position>
     </column>
-    <foreign-key id="351" parent="302" name="staff1_ibfk_1">
+    <foreign-key id="361" parent="306" name="staff1_ibfk_1">
       <ColNames>Sdeptno</ColNames>
       <RefColNames>Dno</RefColNames>
       <RefTableName>dept</RefTableName>
     </foreign-key>
-    <index id="352" parent="302" name="Sdeptno">
+    <index id="362" parent="306" name="Sdeptno">
       <ColNames>Sdeptno</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="353" parent="302" name="PRIMARY">
+    <key id="363" parent="306" name="PRIMARY">
       <ColNames>Sno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="354" parent="303" name="Sno">
+    <column id="364" parent="307" name="S_id">
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="365" parent="307" name="S_name">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="366" parent="307" name="S_sex">
+      <DataType>varchar(1)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="367" parent="307" name="S_age">
+      <DataType>int|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="368" parent="307" name="S_dept">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="369" parent="307" name="S_major">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <key id="370" parent="307" name="PRIMARY">
+      <ColNames>S_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="371" parent="308" name="Sno">
       <DataType>char(9)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="355" parent="303" name="Sname">
+    <column id="372" parent="308" name="Sname">
       <DataType>char(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="356" parent="303" name="Sage">
+    <column id="373" parent="308" name="Sage">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="357" parent="303" name="Saddress">
+    <column id="374" parent="308" name="Saddress">
       <DataType>char(20)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="358" parent="303" name="SclassNO">
+    <column id="375" parent="308" name="SclassNO">
       <DataType>char(10)|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="359" parent="303" name="student_ibfk_1">
+    <foreign-key id="376" parent="308" name="student_ibfk_1">
       <ColNames>SclassNO</ColNames>
       <RefColNames>Cclassno</RefColNames>
       <RefTableName>class</RefTableName>
     </foreign-key>
-    <index id="360" parent="303" name="SclassNO">
+    <index id="377" parent="308" name="SclassNO">
       <ColNames>SclassNO</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="361" parent="303" name="PRIMARY">
+    <key id="378" parent="308" name="PRIMARY">
       <ColNames>Sno</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="362" parent="304" name="Dname">
-      <DataType>char(20)|0s</DataType>
+    <column id="379" parent="309" name="T_id">
+      <DataType>varchar(10)|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="363" parent="304" name="max(Ssalary)">
-      <DataType>int|0s</DataType>
+    <column id="380" parent="309" name="T_name">
+      <DataType>varchar(10)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="364" parent="304" name="min(Ssalary)">
+    <column id="381" parent="309" name="T_age">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="365" parent="304" name="avg(Ssalary)">
+    <column id="382" parent="309" name="T_gender">
+      <DataType>varchar(1)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="383" parent="309" name="T_dept">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="384" parent="310" name="Dname">
+      <DataType>char(20)|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="385" parent="310" name="max(Ssalary)">
+      <DataType>int|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="386" parent="310" name="min(Ssalary)">
+      <DataType>int|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="387" parent="310" name="avg(Ssalary)">
       <DataType>decimal(14,4 digit)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="366" parent="305" name="Sno">
+    <column id="388" parent="311" name="Sno">
       <DataType>char(9)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="367" parent="305" name="Sname">
+    <column id="389" parent="311" name="Sname">
       <DataType>char(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="368" parent="305" name="Sage">
+    <column id="390" parent="311" name="Sage">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="369" parent="305" name="Stitle">
+    <column id="391" parent="311" name="Stitle">
       <DataType>char(10)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="370" parent="305" name="Ssalary">
+    <column id="392" parent="311" name="Ssalary">
       <DataType>int|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="371" parent="305" name="Sdeptno">
+    <column id="393" parent="311" name="Sdeptno">
       <DataType>int|0s</DataType>
       <Position>6</Position>
+    </column>
+    <column id="394" parent="313" name="C_id">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="395" parent="313" name="C_name">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="396" parent="313" name="C_tea">
+      <DataType>int|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="397" parent="313" name="C_stu">
+      <DataType>int|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="398" parent="313" name="C_grade">
+      <DataType>int|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="399" parent="314" name="Dpt_id">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="400" parent="314" name="Dpt_name">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="401" parent="314" name="Dpt_location">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="402" parent="314" name="Dpt_stu">
+      <DataType>int|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="403" parent="314" name="Dpt_tea">
+      <DataType>int|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="404" parent="315" name="S_id">
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="405" parent="315" name="S_name">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="406" parent="315" name="S_sex">
+      <DataType>varchar(1)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="407" parent="315" name="S_age">
+      <DataType>int|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="408" parent="315" name="S_dept">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="409" parent="315" name="S_major">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <key id="410" parent="315" name="PRIMARY">
+      <ColNames>S_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <column id="411" parent="316" name="T_id">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="412" parent="316" name="T_name">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="413" parent="316" name="T_age">
+      <DataType>int|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="414" parent="316" name="T_gender">
+      <DataType>varchar(1)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="415" parent="316" name="T_dept">
+      <DataType>varchar(10)|0s</DataType>
+      <Position>5</Position>
     </column>
   </database-model>
 </dataSource>
