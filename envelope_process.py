@@ -71,12 +71,13 @@ class envelope:
         return self.y_upper, self.y_lower
 
 
-# data = np.loadtxt('filtered_.csv').reshape(1, -1)
-# nx = data.shape[1]
-# x = np.linspace(0, nx, nx, endpoint=False)
-# env = envelope(data, 100)
-# upper, lower = env.start()
-# plt.plot(x, np.squeeze(data))
-# plt.plot(x, upper)
-# plt.show()
-# np.savetxt('./envelope_data_3.csv', upper)
+data = np.loadtxt('filtered_.csv').reshape(1, -1)
+nx = data.shape[1]
+x = np.linspace(0, nx, nx, endpoint=False)
+env = envelope(data, 100)
+upper, lower = env.start()
+plt.plot(x, np.squeeze(data))
+plt.plot(x, upper)
+plt.grid()
+plt.show()
+np.savetxt('./envelope_data_3.csv', upper)

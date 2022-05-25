@@ -31,7 +31,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\MS_6.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\MS_7.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\envelope_data_3.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -60,6 +74,13 @@
           </value>
         </entry>
         <entry key="\gross_name.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\random_data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

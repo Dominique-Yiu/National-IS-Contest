@@ -22,7 +22,7 @@ class pattern_match:
         if path is None:
             self.data = data
         else:
-            self.data = np.loadtxt(path, delimiter=',')
+            self.data = np.loadtxt(path)
         self.number = number * 5
         self.length = len(self.data)
         self.start_point = []
@@ -110,16 +110,20 @@ class pattern_match:
         return self.new_start
 
     def plot_(self):
-        plt.figure()
-        plt.plot(self.data)
+        fig = plt.figure(figsize=(10, 8), dpi=80)
+        ax = fig.add_subplot(111)
+        ax.plot(self.data, linewidth=4.0)
+
         for idx in self.new_start:
             self.data_time.append([item for item in range(idx, idx + 2500)])
             self.data_seg.append(self.data[self.data_time[-1]])
         for idx in range(len(self.data_seg)):
-            plt.plot(self.data_time[idx], self.data_seg[idx])
+            ax.plot(self.data_time[idx], self.data_seg[idx], linewidth=4.0)
+            ax.scatter(self.data_time[idx][0], self.data_seg[idx][0], marker='o', color='r', s=200)
+        ax.grid()
         plt.show()
 
 
-# match = pattern_match('LXY_两快一慢/enveloped_data_01.csv')
-# match.start()
-# match.plot_()
+match = pattern_match(path='envelope_data_3.csv', number=3)
+match.start()
+match.plot_()

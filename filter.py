@@ -48,11 +48,12 @@ class iir_design_filter:
         plt.plot(t, self.raw_data, label='Raw Data')
         plt.plot(t, self.filtered_data, label='Filtered Data')
         plt.legend(loc='upper left')
+        plt.grid()
         plt.show()
 
 
-# L_path = 'LXY_两快一慢/LXY_01.csv'
-# S_path = 'filtered_.csv'
-# _filter = iir_design_filter()
-# _filter.filter_(load_path=L_path, save_path=S_path)
-# _filter.plot_()
+L_path = 'three/LXY_两快一慢/LXY_01.csv'
+S_path = 'filtered_.csv'
+_filter = iir_design_filter()
+_filter.filter_(load_path=L_path, save_path=S_path)
+_filter.plot_()

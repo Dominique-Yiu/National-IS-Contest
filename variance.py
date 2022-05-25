@@ -29,6 +29,7 @@ class window_var:
         self.peaks_index = find_peaks(self.move_var, distance=800)[0]
         self.peaks = self.move_var[self.peaks_index]
         self.biggest_peaks_index = np.argsort(self.peaks)[::-1][0:self.head]
+        self.biggest_peaks_index = self.biggest_peaks_index[1::2]
         self.biggest_peaks = self.peaks[self.biggest_peaks_index]
         self.biggest_peaks_index = self.peaks_index[self.biggest_peaks_index]
 
