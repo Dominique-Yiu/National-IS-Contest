@@ -29,9 +29,11 @@ class window_var:
         self.peaks_index = find_peaks(self.move_var, distance=800)[0]
         self.peaks = self.move_var[self.peaks_index]
         self.biggest_peaks_index = np.argsort(self.peaks)[::-1][0:self.head]
-        self.biggest_peaks_index = self.biggest_peaks_index[1::2]
         self.biggest_peaks = self.peaks[self.biggest_peaks_index]
         self.biggest_peaks_index = self.peaks_index[self.biggest_peaks_index]
+        half = np.argsort(self.biggest_peaks_index)[1::2]
+        self.end_points  = self.biggest_peaks[half]
+        self.end_points_index  = self.biggest_peaks_index[half]
 
         return self.biggest_peaks_index, self.biggest_peaks
 
@@ -42,7 +44,7 @@ class window_var:
 
         ax2 = ax.twinx()
         lin2 = ax2.plot(self.move_var, color='r')
-        ax2.scatter(self.biggest_peaks_index, self.biggest_peaks, marker='+', color='g', s=200)
+        ax2.scatter(self.end_points_index, self.end_points, marker='+', color='g', s=200)
 
         lines = lin1 + lin2
         ax.legend(lines, ['envelope data', 'variance'])
@@ -50,6 +52,6 @@ class window_var:
         plt.show()
 
 
-# var = window_var('envelope_data.csv')
+# var = window_var('envelope_data_3.csv', head=3)
 # var.start()
 # var.plot_()

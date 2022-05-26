@@ -16,6 +16,8 @@ import serial
 import serial.tools.list_ports
 from encrypt import encrypt
 import matplotlib.pyplot as plt
+import matlab.engine
+eng = matlab.engine.start_matlab()
 
 
 def get_features(collector: collect_data):
@@ -23,13 +25,16 @@ def get_features(collector: collect_data):
         filtered_data = collector.start(m_time=13)
         upper, _ = envelope(filtered_data, 100).start()
         upper = upper[int(2302 * 1):-int(2302 * 0.5)]
-        # np.savetxt('filtered_data.csv', upper)
+        upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+        upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)
+        upper = upper[0]
         rhythm_number = collector.get_rhythm_number(enveloped_data=upper)
         end_points, _ = window_var(data=upper, head=rhythm_number).start()
         end_points = np.sort(end_points)
         end_points = end_points[1::2]
-        start_points = pattern_match(data=upper, number=rhythm_number).start()
-        start_points = np.array(start_points)
+        # start_points = pattern_match(data=upper, number=rhythm_number).start()
+        start_points, data_time, data_seg = eng.patterMatch(upper, rhythm_number, nargout=3)
+        start_points = np.array(start_points[0])
         features = np.append(end_points, start_points)
         features = np.sort(features) - features.min()
         if len(features) == rhythm_number * 2:
