@@ -7,7 +7,7 @@
 # @Software: PyCharm
 import numpy as np
 import matplotlib.pyplot as plt
-std_values = np.loadtxt('standard_value.csv', delimiter=',')[:-1]
+std_values = np.loadtxt('./output_data/standard_value.csv', delimiter=',')[:-1]
 
 
 def normalize(x, y, c):

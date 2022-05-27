@@ -25,15 +25,16 @@ def get_features(collector: collect_data):
         filtered_data = collector.start(m_time=13)
         upper, _ = envelope(filtered_data, 100).start()
         upper = upper[int(2302 * 1):-int(2302 * 0.5)]
+        upper = upper.reshape(-1)
         upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
         upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)
         upper = upper[0]
-        rhythm_number = collector.get_rhythm_number(enveloped_data=upper)
-        end_points, _ = window_var(data=upper, head=rhythm_number).start()
+        var_upper = np.array(upper).astype(float)
+        rhythm_number = collector.get_rhythm_number(enveloped_data=var_upper)
+        end_points, _ = window_var(data=var_upper, head=rhythm_number).start()
         end_points = np.sort(end_points)
         end_points = end_points[1::2]
-        # start_points = pattern_match(data=upper, number=rhythm_number).start()
-        start_points, data_time, data_seg = eng.patterMatch(upper, rhythm_number, nargout=3)
+        start_points, data_time, data_seg, _time = eng.patterMatch(upper, rhythm_number, nargout=4)
         start_points = np.array(start_points[0])
         features = np.append(end_points, start_points)
         features = np.sort(features) - features.min()
