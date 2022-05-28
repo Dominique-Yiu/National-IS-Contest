@@ -1,9 +1,9 @@
 import numpy as np
-measure_cnt = 8
+measure_cnt = 1
 
 
 # %%
-def delete_modify(file_path='gross_name.csv', raw_path='gross_features.csv', delete_name=None):
+def delete_modify(file_path='./output_data/gross_name.csv', raw_path='./output_data/gross_features.csv', delete_name=None):
     name_list = np.loadtxt(file_path, dtype=str)
     raw_data = np.loadtxt(raw_path)
     index = np.where(name_list == delete_name)[0]
@@ -25,7 +25,7 @@ def delete_modify(file_path='gross_name.csv', raw_path='gross_features.csv', del
 
 
 # %%
-def add_modify(file_path='gross_name.csv', raw_path='gross_features.csv', data=None, add_data=None, add_name=None):
+def add_modify(file_path='./output_data/gross_name.csv', raw_path='./output_data/gross_features.csv', data=None, add_data=None, add_name=None):
     name_list = np.loadtxt(file_path, dtype=str)
     if data is None:
         raw_data = np.loadtxt(raw_path)
@@ -49,7 +49,7 @@ def add_modify(file_path='gross_name.csv', raw_path='gross_features.csv', data=N
 
 
 # %%
-def overlap_modify(file_path='gross_name.csv', raw_path='gross_features.csv', add_data=None, selected_name=None):
+def overlap_modify(file_path='./output_data/gross_name.csv', raw_path='./output_data/gross_features.csv', add_data=None, selected_name=None):
     name_list = np.loadtxt(file_path, dtype=str)
     raw_data = np.loadtxt(raw_path)
     index = np.where(name_list == selected_name)[0]

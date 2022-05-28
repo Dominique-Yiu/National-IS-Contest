@@ -15,7 +15,7 @@ root_3 = "six_seven/FIVELXY1"
 root_4 = "six_seven/FIVELXY2"
 root_5 = "six_seven/FIVEMS1"
 root_6 = "six_seven/FIVEMS2"
-eng = matlab.engine.start_matlab()
+# eng = matlab.engine.start_matlab()
 
 # all_features = []
 # for idx in range(55):
@@ -47,25 +47,35 @@ eng = matlab.engine.start_matlab()
 
 
 ev_data = np.loadtxt('./output_data/smoothed_LXY_01.csv')
-# plt.plot(ev_data)
-# plt.show()
-ev_data = matlab.double(initializer=list(ev_data), size=(1, len(ev_data)), is_complex=False)
-smoothData = eng.smoothdata(ev_data, 'gaussian', 400, nargout=1)
+plt.figure(figsize=(9,2))
+plt.subplot(1, 3, 1)
+plt.plot(ev_data)
+plt.subplot(1, 3, 2)
+sample_data = ev_data[::50]
+plt.plot(sample_data)
+plt.subplot(1, 3, 3)
+recover_data = np.zeros((len(sample_data), 50))
+for idx, item in enumerate(sample_data):
+    recover_data[idx][:] = item
+plt.plot(recover_data.ravel())
+plt.show()
+# ev_data = matlab.double(initializer=list(ev_data), size=(1, len(ev_data)), is_complex=False)
+# smoothData = eng.smoothdata(ev_data, 'gaussian', 400, nargout=1)
 # plt.plot(smoothData[0])
 # plt.show()
-new_start, data_time, data_seg, time = eng.patterMatch(smoothData, 3, nargout=4)
-print(new_start)
-def show(raw_time, raw_data,  start_time, start_seg):
-    plt.figure(figsize=(16, 9))
-    plt.plot(raw_time, raw_data)
-    plt.draw()
-    cnt = start_time.size[0]
-    for idx in range(cnt):
-        plt.plot(start_time[idx], start_seg[idx])
-        plt.draw()
-    plt.show()
-print(data_time.size)
-show(raw_time=time[0], raw_data=smoothData[0], start_time=data_time, start_seg=data_seg)
+# new_start, data_time, data_seg, time = eng.patterMatch(smoothData, 3, nargout=4)
+# print(new_start)
+# def show(raw_time, raw_data,  start_time, start_seg):
+#     plt.figure(figsize=(16, 9))
+#     plt.plot(raw_time, raw_data)
+#     plt.draw()
+#     cnt = start_time.size[0]
+#     for idx in range(cnt):
+#         plt.plot(start_time[idx], start_seg[idx])
+#         plt.draw()
+#     plt.show()
+# print(data_time.size)
+# show(raw_time=time[0], raw_data=smoothData[0], start_time=data_time, start_seg=data_seg)
 
 
 

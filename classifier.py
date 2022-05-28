@@ -14,7 +14,7 @@ def process_features(data):
 
 
 class one_class_svm:
-    def __init__(self, train_path='gross_features.csv', test_path=None, nu=0.1, kernel="rbf", gamma='scale',
+    def __init__(self, train_path='./output_data/gross_features.csv', test_path=None, nu=0.1, kernel="rbf", gamma='scale',
                  test_size=0.3, random_state=2021):
         self.y_train = None
         self.y_pred_train = None

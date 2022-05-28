@@ -13,7 +13,7 @@ from filter import iir_design_filter
 
 
 class collect_data:
-    def __init__(self, port='COM4', rate=115200, m_time=20):
+    def __init__(self, port='COM3', rate=115200, m_time=20):
         self.env_intensity = None
         self.serial_port = port
         self.serial_rate = rate
@@ -25,7 +25,8 @@ class collect_data:
     '''get environment's intensity'''
 
     def get_env_intensity(self, m_time=10):
-        self.ser.open()
+        if not self.ser.isOpen():
+            self.ser.open()
         print('Please guarantee your environment in  a stable status. Waiting......')
         time.sleep(1)
 
@@ -40,7 +41,7 @@ class collect_data:
                 average_series[i] = self.ser.readline()
             except:
                 pass
-        self.ser.close()
+        # self.ser.close()
 
         average_series = self.filter.filter_(env_data=average_series)
         result = average_series.mean()
@@ -66,7 +67,8 @@ class collect_data:
 
     def start(self, load_path=None, save_path=None, m_time=10):
         self.measuring_time = m_time * 2302
-        self.ser.open()
+        if not self.ser.isOpen():
+            self.ser.open()
         print('Please guarantee your environment in  a stable status. Waiting......')
         time.sleep(1)
 
@@ -93,14 +95,14 @@ class collect_data:
             t.close()
         time.sleep(0.2)
         print('Collect Complete!')
-        self.ser.close()
+        # self.ser.close()
         # return filtered data
         return self.filter.filter_(raw_data=string_a, load_path=load_path, save_path=save_path)
 
 
-# L_path = 'random_data.csv'
-# S_path = 'filtered_random_data.csv'
-# adc = collect_data()
-# adc.start(load_path=L_path, save_path=S_path)
-# # adc.get_env_intensity()
-# adc.filter.plot_()
+L_path = 'YCW4_20.csv'
+S_path = 'filtered_random_data.csv'
+adc = collect_data()
+adc.start(load_path=L_path, save_path=S_path, m_time=15)
+# adc.get_env_intensity()
+adc.filter.plot_()

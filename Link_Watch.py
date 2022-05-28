@@ -38,13 +38,16 @@ def get_features(collector: collect_data):
         end_points = np.sort(end_points)
         end_points = end_points[1::2]
         start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, nargout=4)
-        start_points = np.array(start_points[0])
+        if not isinstance(start_points, (float)):
+            start_points = np.array(start_points[0])
+        else:
+            start_points = np.array(start_points)
         features = np.append(end_points, start_points)
         features = np.sort(features) - features.min()
         if len(features) == rhythm_number * 2:
             break
         else:
-            collector.ser.write('F'.decode())
+            collector.ser.write('F'.encode())
             print('重新输入.')
             time.sleep(3)
 
@@ -103,12 +106,16 @@ class recieve_data(Thread):
     
     def run(self):
         while True:
+            if not self.collector.ser.isOpen():
+                self.collector.ser.open()
             raw_data = self.collector.ser.readline()
             if not raw_data:
                 break
-            data = raw_data.decode()[:-1]
+            data = raw_data.decode()[:-2]
+            print(data)
             #   注册消息
             if data == 'S':
+                print(data)
                 #   测量环境噪声
                 self.collector.get_env_intensity()
                 self.collector.ser.write('d'.encode())
@@ -130,7 +137,7 @@ class recieve_data(Thread):
                 self.collector.ser.write('e'.encode())
 
                 features = get_features(self.collector)
-                yes_or_no = self.clf.predict_(uncertified_person=features)
+                yes_or_no = self.clf.predict_(uncertified_person=features.reshape(1, -1))
                 if yes_or_no:
                     self.collector.ser.write('Y'.encode())
                 else:
@@ -141,15 +148,15 @@ class recieve_data(Thread):
 
 
 if __name__=='__main__':
-    print_devices()
+    # print_devices()
 
-    addr = input('输入设备蓝牙地址：')
-    service_matches = bluetooth.find_service(address=addr)
-    first_match = service_matches[0]
-    port = first_match["port"]
-    name = first_match["name"]
-    host = first_match["host"]
-    print("Connecting to \"{}\" on {}, {}".format(name.decode(), host, port))
+    # addr = input('输入设备蓝牙地址：')
+    # service_matches = bluetooth.find_service(address=addr)
+    # first_match = service_matches[0]
+    # port = first_match["port"]
+    # name = first_match["name"]
+    # host = first_match["host"]
+    # print("Connecting to \"{}\" on {}, {}".format(name.decode(), host, port))
     # socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
     # socket.connect((host, port))
     # socket.close()
