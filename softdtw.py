@@ -10,6 +10,8 @@ from filter import iir_design_filter
 from envelope_process import envelope
 from variance import window_var
 from modify_features import *
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 
 def generate_weights(timeSeries, gamma=10 ** -1):
     num_dim = timeSeries[0].shape[1]
@@ -68,13 +70,16 @@ for idx in range(8):
 formatted_dataset = to_time_series_dataset(gross)
 scaled_dataset = TimeSeriesScalerMinMax().fit_transform(formatted_dataset)
 print(scaled_dataset.shape)
-
+plt.figure(figsize=(16, 8))
 for ts in scaled_dataset:
     plt.plot(ts.ravel(), "k-", alpha=.2)
 for i in range(10):
     weights = generate_weights(scaled_dataset)
     bar = softdtw_barycenter(X=scaled_dataset, gamma=10 ** -1, weights=weights)
-    plt.plot(bar.ravel(), "r-")
-
+    plt.plot(bar.ravel(), "r-", alpha=.5)
+plt.xlabel("样本个数", fontsize=14)
+plt.ylabel("归一化的电磁强度", fontsize=14)  # fontsize=18为名字大小
+plt.tick_params(labelsize=12)  #刻度字体大小13
+plt.legend()
 plt.tight_layout()
 plt.show()

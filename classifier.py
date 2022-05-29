@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 import pickle
 import numpy as np
 import os
+import time
 
 
 def process_features(data):
@@ -56,4 +57,10 @@ class one_class_svm:
         #     print(self.clf.predict(uncertified_person))
 
 clf = one_class_svm()
+current_time = time.time()
 clf.train_()
+print(time.time() - current_time)
+
+current_time = time.time()
+clf.predict_(clf.df[0])
+print(time.time() - current_time)
