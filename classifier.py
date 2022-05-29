@@ -54,3 +54,6 @@ class one_class_svm:
         # with open('./model/clf.pickle', 'rb') as f:
         #     self.clf = pickle.load(f)
         #     print(self.clf.predict(uncertified_person))
+
+clf = one_class_svm()
+clf.train_()
