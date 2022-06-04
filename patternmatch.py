@@ -124,6 +124,6 @@ class pattern_match:
         plt.show()
 
 
-# match = pattern_match(path='envelope_data_3.csv', number=3)
+# match = pattern_match(path='./output_data/smoothed_LXY_01.csv', number=3)
 # match.start()
 # match.plot_()

@@ -12,7 +12,7 @@ from scipy.signal import find_peaks
 
 
 class window_var:
-    def __init__(self, path=None, data=None, head=12):
+    def __init__(self, path=None, data=None, head=12, window=10):
         self.load_path = path
         self.head = head * 2
         if path is None:
@@ -23,10 +23,10 @@ class window_var:
         self.biggest_peaks_index = None
         self.biggest_peaks = None
         self.peaks_index = None
-        self.move_var = np.squeeze(pd.DataFrame(self.data).rolling(window=10).var().values)
+        self.move_var = np.squeeze(pd.DataFrame(self.data).rolling(window=window).var().values)
 
-    def start(self):
-        self.peaks_index = find_peaks(self.move_var, distance=800)[0]
+    def start(self, distance=800):
+        self.peaks_index = find_peaks(self.move_var, distance=distance)[0]
         self.peaks = self.move_var[self.peaks_index]
         self.biggest_peaks_index = np.argsort(self.peaks)[::-1][0:self.head]
         self.biggest_peaks = self.peaks[self.biggest_peaks_index]

@@ -60,7 +60,7 @@ for idx in range(8):
     path = root_1 + "/" + "LXY_" + end + "_smooth.csv"
     data = np.loadtxt(path, delimiter=",")
     if (idx + 1) in all_index:
-        data = data[all_features[num][0]:all_features[num][1]]
+        # data = data[all_features[num][0]:all_features[num][1]]
         num += 1
         
         # np.savetxt(root_1 + "/" + "LXY_" + end + "_clip.csv", data)
@@ -69,7 +69,7 @@ for idx in range(8):
         gross.append(data)
 formatted_dataset = to_time_series_dataset(gross)
 scaled_dataset = TimeSeriesScalerMinMax().fit_transform(formatted_dataset)
-print(scaled_dataset.shape)
+# print(scaled_dataset.shape)
 plt.figure(figsize=(16, 8))
 for ts in scaled_dataset:
     plt.plot(ts.ravel(), "k-", alpha=.2)
@@ -77,9 +77,9 @@ for i in range(10):
     weights = generate_weights(scaled_dataset)
     bar = softdtw_barycenter(X=scaled_dataset, gamma=10 ** -1, weights=weights)
     plt.plot(bar.ravel(), "r-", alpha=.5)
-plt.xlabel("样本个数", fontsize=14)
-plt.ylabel("归一化的电磁强度", fontsize=14)  # fontsize=18为名字大小
-plt.tick_params(labelsize=12)  #刻度字体大小13
+plt.xlabel("样本个数", fontsize=18)
+plt.ylabel("归一化的电磁强度", fontsize=18)  # fontsize=18为名字大小
+plt.tick_params(labelsize=15)  #刻度字体大小13
 plt.legend()
 plt.tight_layout()
 plt.show()

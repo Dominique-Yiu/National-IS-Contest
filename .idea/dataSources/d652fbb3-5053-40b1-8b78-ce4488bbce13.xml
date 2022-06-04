@@ -1567,19 +1567,19 @@ studentID</ColNames>
     <trigger id="386" parent="304" name="credit1">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
-      <SourceTextLength>289</SourceTextLength>
+      <SourceTextLength>307</SourceTextLength>
       <Turn>after-row</Turn>
     </trigger>
     <trigger id="387" parent="304" name="credit2">
       <Definer>root@localhost</Definer>
       <Events>U</Events>
-      <SourceTextLength>289</SourceTextLength>
+      <SourceTextLength>307</SourceTextLength>
       <Turn>after-row</Turn>
     </trigger>
     <trigger id="388" parent="304" name="credit3">
       <Definer>root@localhost</Definer>
       <Events>D</Events>
-      <SourceTextLength>289</SourceTextLength>
+      <SourceTextLength>307</SourceTextLength>
       <Turn>after-row</Turn>
     </trigger>
     <column id="389" parent="305" name="teacherName">
