@@ -123,7 +123,7 @@ class pattern_match:
         ax.grid()
         plt.show()
 
-
-# match = pattern_match(path='./output_data/smoothed_LXY_01.csv', number=3)
-# match.start()
-# match.plot_()
+if __name__=='__main__':
+    match = pattern_match(path='./output_data/smoothed_LXY_01.csv', number=3)
+    match.start()
+    match.plot_()

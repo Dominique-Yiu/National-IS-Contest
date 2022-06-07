@@ -6,38 +6,40 @@
 # @File    : Link_Watch.py
 # @Software: PyCharm
 
+from curses import window
 import bluetooth
 import os
 from pprint import pprint
 import sys
 from threading import Thread
 import serial
-from modify_features import *
-from envelope_process import envelope
-from classifier import one_class_svm
+from utils.modify_features import *
+from utils.envelope_process import envelope
+from utils.classifier import one_class_svm
 import numpy as np
-from variance import window_var
-from patternmatch import pattern_match
-from adc_collect import collect_data
+from utils.variance import window_var
+from utils.patternmatch import pattern_match
+from utils.adc_collect import collect_data
 import time
 import matlab.engine
+from utils.softdtw import SoftDBA
 eng = matlab.engine.start_matlab()
 
 def get_features(collector: collect_data):
     while True:
-        filtered_data = collector.start(m_time=13)
-        upper, _ = envelope(filtered_data, 100).start()
-        upper = upper[int(2302 * 1):-int(2302 * 0.5)]
+        filtered_data = collector.start(m_time=13)  #   定义收集13秒的ADC数据
+        upper, _ = envelope(filtered_data, 100).start() #   对数据进行包络，k=100
+        upper = upper[int(2302 * 1):-int(2302 * 0.5)]   #   去除一些硬件原因的不稳定数据
         upper = upper.reshape(-1)
-        upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
-        upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)
+        upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)  #   数据转换为matlab类型
+        upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)   #   数据进行平滑处理
         upper = upper[0]
         var_upper = np.array(upper).astype(float)
-        rhythm_number = collector.get_rhythm_number(enveloped_data=var_upper)
-        end_points, _ = window_var(data=var_upper, head=rhythm_number).start()
+        rhythm_number = collector.get_rhythm_number(enveloped_data=var_upper)   #   获得节奏数
+        end_points, _ = window_var(data=var_upper, head=rhythm_number, window=10).start(distance=800)  #   最大值之间距离设置为800
         end_points = np.sort(end_points)
         end_points = end_points[1::2]
-        start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, nargout=4)
+        start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, False, nargout=4)
         if not isinstance(start_points, (float)):
             start_points = np.array(start_points[0])
         else:

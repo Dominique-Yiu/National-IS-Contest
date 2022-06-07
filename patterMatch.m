@@ -29,36 +29,6 @@ function [new_start, data_time, data_seg, time] = patterMatch(ev_value, rhythm_n
     %   R-square: 0.9999
     %   Adjusted R-square: 0.9999
     %   RMSE: 0.4013
-
-    %% use_sample = true
-    % Fit computation did not converge:
-    % Fitting stopped because the number of iterations or function evaluations exceeded the specified maximum.
-
-    % Fit found when optimization terminated:
-
-    % General model Gauss4:
-    %      f(x) = 
-    %               a1*exp(-((x-b1)/c1)^2) + a2*exp(-((x-b2)/c2)^2) + 
-    %               a3*exp(-((x-b3)/c3)^2) + a4*exp(-((x-b4)/c4)^2)
-    % Coefficients (with 95% confidence bounds):
-    %        a1 =       73.36  (-670.1, 816.8)
-    %        b1 =      -1.501  (-17.83, 14.83)
-    %        c1 =       5.155  (-7.777, 18.09)
-    %        a2 =       327.8  (-1275, 1931)
-    %        b2 =      0.9073  (-19.35, 21.16)
-    %        c2 =       15.43  (-40.05, 70.9)
-    %        a3 =       4.764  (-11.31, 20.84)
-    %        b3 =       17.48  (16.43, 18.53)
-    %        c3 =       3.738  (-0.2222, 7.699)
-    %        a4 =       276.8  (-96.95, 650.6)
-    %        b4 =       27.36  (-27.96, 82.68)
-    %        c4 =       22.88  (-49.43, 95.19)
-
-    % Goodness of fit:
-    %   SSE: 4.544
-    %   R-square: 1
-    %   Adjusted R-square: 0.9999
-    %   RMSE: 0.4891
     
     
     
@@ -84,21 +54,46 @@ function [new_start, data_time, data_seg, time] = patterMatch(ev_value, rhythm_n
 
         times = 1;
         rhythm_times = 5;
+% General model Gauss4:
+%      f(x) = 
+%               a1*exp(-((x-b1)/c1)^2) + a2*exp(-((x-b2)/c2)^2) + 
+%               a3*exp(-((x-b3)/c3)^2) + a4*exp(-((x-b4)/c4)^2)
+% Coefficients (with 95% confidence bounds):
+%        a1 =      0.2523  (-0.5127, 1.017)
+%        b1 =      -5.231  (-16.17, 5.712)
+%        c1 =        6.33  (-2.872, 15.53)
+%        a2 =      0.3639  (-4.823, 5.551)
+%        b2 =     -0.5016  (-55.82, 54.82)
+%        c2 =       14.36  (-40.8, 69.52)
+%        a3 =  -0.0008222  (-4.799e+13, 4.799e+13)
+%        b3 =       7.063  (-2.422e+15, 2.422e+15)
+%        c3 =     0.08288  (-5.307e+15, 5.307e+15)
+%        a4 =      0.3702  (-2.551, 3.292)
+%        b4 =       9.068  (-277.5, 295.6)
+%        c4 =       30.86  (-145.9, 207.6)
+
+% Goodness of fit:
+%   SSE: 8.057e-05
+%   R-square: 0.9999
+%   Adjusted R-square: 0.9999
+%   RMSE: 0.002059
+
+
     else
         time = 1/2302:1/2302:length(ev_value)/2302;
 
-        a1 =       73.36 ;
-        b1 =      -1.501;
-        c1 =       5.155 ;
-        a2 =       327.8;
-        b2 =      0.9073;
-        c2 =       15.43  ;
-        a3 =       4.764;
-        b3 =       17.48;
-        c3 =       3.738 ;
-        a4 =       276.8;
-        b4 =       27.36;
-        c4 =       22.88;
+        a1 =      0.2523;
+        b1 =      -5.231;
+        c1 =        6.33;
+        a2 =      0.3639;
+        b2 =     -0.5016;
+        c2 =       14.36;
+        a3 =  -0.0008222;
+        b3 =       7.063;
+        c3 =     0.08288;
+        a4 =      0.3702;
+        b4 =       9.068;
+        c4 =       30.86;
 
         x = 0:30;
         L = a1*exp(-((x-b1)/c1).^2) + a2*exp(-((x-b2)/c2).^2) + a3*exp(-((x-b3)/c3).^2) + a4*exp(-((x-b4)/c4).^2);

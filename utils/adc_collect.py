@@ -99,10 +99,10 @@ class collect_data:
         # return filtered data
         return self.filter.filter_(raw_data=string_a, load_path=load_path, save_path=save_path)
 
-
-L_path = 'YCW4_20.csv'
-S_path = 'filtered_random_data.csv'
-adc = collect_data()
-adc.start(load_path=L_path, save_path=S_path, m_time=15)
-# adc.get_env_intensity()
-adc.filter.plot_()
+if __name__=='__main__':
+    L_path = 'YCW4_20.csv'
+    S_path = 'filtered_random_data.csv'
+    adc = collect_data()
+    adc.start(load_path=L_path, save_path=S_path, m_time=15)
+    # adc.get_env_intensity()
+    adc.filter.plot_()

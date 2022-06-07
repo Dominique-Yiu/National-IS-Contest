@@ -56,11 +56,12 @@ class one_class_svm:
         #     self.clf = pickle.load(f)
         #     print(self.clf.predict(uncertified_person))
 
-clf = one_class_svm()
-current_time = time.time()
-clf.train_()
-print(time.time() - current_time)
+if __name__=='__main__':
+    clf = one_class_svm()
+    current_time = time.time()
+    clf.train_()
+    print(time.time() - current_time)
 
-current_time = time.time()
-clf.predict_(clf.df[0])
-print(time.time() - current_time)
+    current_time = time.time()
+    clf.predict_(clf.df[0])
+    print(time.time() - current_time)

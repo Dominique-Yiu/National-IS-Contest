@@ -51,9 +51,9 @@ class iir_design_filter:
         plt.grid()
         plt.show()
 
-
-# L_path = 'three/LXY_两快一慢/LXY_01.csv'
-# S_path = 'filtered_.csv'
-# _filter = iir_design_filter()
-# _filter.filter_(load_path=L_path, save_path=S_path)
-# _filter.plot_()
+if __name__=='__main__':
+    L_path = 'three/LXY_两快一慢/LXY_01.csv'
+    S_path = 'filtered_.csv'
+    _filter = iir_design_filter()
+    _filter.filter_(load_path=L_path, save_path=S_path)
+    _filter.plot_()
