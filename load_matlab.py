@@ -2,6 +2,7 @@ import matlab.engine
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from utils.classifier import one_class_svm
 from utils.filter import iir_design_filter
 from utils.envelope_process import envelope
 from utils.variance import window_var
@@ -9,6 +10,8 @@ from utils.modify_features import *
 import os
 import copy
 import time
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 
 def show(raw_time, raw_data,  start_time, start_seg):
     plt.figure(figsize=(16, 9))
@@ -26,158 +29,140 @@ root_3 = "six_seven/FIVELXY1"
 root_4 = "six_seven/FIVELXY2"
 root_5 = "six_seven/FIVEMS1"
 root_6 = "six_seven/FIVEMS2"
-eng = matlab.engine.start_matlab()
+# eng = matlab.engine.start_matlab()
 
-all_features = []
-all_index = []
-for idx in range(55):
-    if (idx + 1) < 10:
-        end = '0' + str(idx + 1)
-    else:
-        end = str(idx + 1)
-    path = root_1 + "/" + "LXY_" + end + ".csv"
-    data = np.loadtxt(path, delimiter=",")
-    filter_module = iir_design_filter()
-    filtered_data = filter_module.filter_(raw_data=data)
-    upper, _ = envelope(filtered_data, 100).start()
-    upper = upper[int(2302 * 1):-int(2302 * 0.5)]
-    upper = upper.reshape(-1)
-    upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
-
-    current_time = time.time()
-    upper = eng.smoothdata(upper, 'gaussian', 200, nargout=1)
-    print(time.time() - current_time)
-    
-    upper = upper[0]
-    upper = upper[::50]
-    np.savetxt(root_1 + "/" + "LXY_" + end + "_smooth.csv", upper)
-    var_upper = np.array(upper).astype(float)
-    rhythm_number = 3
-    
-    current_time = time.time()
-    win = window_var(data=var_upper, head=rhythm_number, window=5)
-    end_points, _ = win.start(distance=20)
-    # win.plot_()
-    end_points = np.sort(end_points)
-    end_points = end_points[1::2]
-    print(time.time() - current_time)
-    
-    current_time = time.time()
-    start_points, data_time, data_seg, _time = eng.patterMatch(upper, rhythm_number, True, nargout=4)
-    # show(raw_time=_time[0], raw_data=upper, start_time=data_time, start_seg=data_seg)
-    if not isinstance(start_points, (float)):
-        start_points = np.array(start_points[0])
-    else:
-        start_points = np.array(start_points)
-    print(time.time() - current_time)
-
-    features = np.append(end_points, start_points)
-    features = np.sort(features)
-    # features = np.sort(features) - features.min()
-    if len(features) == rhythm_number * 2:
-        all_features.append(features.tolist())
-        all_index.append(idx + 1)
-# np.savetxt('LXY_3.csv', all_features)
-# np.savetxt('LXY_3_index.csv', all_index)
-
-# from tslearn.preprocessing import TimeSeriesScalerMinMax
-# from tslearn.barycenters import softdtw_barycenter
-# from tslearn.utils import to_time_series_dataset
-# from tslearn.metrics import dtw, soft_dtw
-# plt.rcParams['font.sans-serif'] = ['SimHei']
-# plt.rcParams['axes.unicode_minus'] = False
-# font1 = {'size': 15}
-# path = root_1 + "/" + "LXY_" + '10' + "_smooth.csv"
-# plt.figure(figsize=(16, 8))
-# data = np.loadtxt(path, delimiter=",")
-# plt.subplot(1, 2, 1)
-# plt.plot(data, label='原始数据')
-# plt.xlabel("样本个数", fontsize=18)
-# plt.ylabel("电磁强度", fontsize=18)  # fontsize=18为名字大小
-# plt.legend(prop=font1)
-# plt.tick_params(labelsize=15)  #刻度字体大小13
-# sample_data = data[::50]
-# plt.subplot(1, 2, 2)
-# plt.plot(sample_data, label='采样数据')
-# plt.xlabel("样本个数", fontsize=18)
-# plt.ylabel("电磁强度", fontsize=18)  # fontsize=18为名字大小
-# plt.tick_params(labelsize=15)  #刻度字体大小13
-# plt.legend(prop=font1)
-# plt.show()
-
-
-# all_index = np.loadtxt('LXY_3_index.csv', dtype=int)
-# all_features = np.loadtxt('LXY_3.csv', dtype=int)
-# all_features = all_features[:,[0, -1]]
-# num = 0
-# gross = []
-# for idx in range(55):
+# all_features = []
+# all_index = []
+# ''' 提取出所有原始特征 '''
+# for idx in range(20):
 #     if (idx + 1) < 10:
 #         end = '0' + str(idx + 1)
 #     else:
 #         end = str(idx + 1)
-#     path = root_1 + "/" + "LXY_" + end + "_smooth.csv"
+#     path = root_3 + "/" + "FIVELXY1_" + str(idx + 1) + ".csv"
 #     data = np.loadtxt(path, delimiter=",")
-#     if (idx + 1) in all_index:
-#         data = data[all_features[num][0]:all_features[num][1]]
-#         num += 1
-        
-#         # np.savetxt(root_1 + "/" + "LXY_" + end + "_clip.csv", data)
-#         data = data[::50].reshape(-1)
-#         # print(data.shape)
-#         gross.append(data)
-# formatted_dataset = to_time_series_dataset(gross)
-# scaled_dataset = TimeSeriesScalerMinMax().fit_transform(formatted_dataset)
-# print(scaled_dataset[0].shape)
+#     filter_module = iir_design_filter()
+#     filtered_data = filter_module.filter_(raw_data=data)
+#     upper, _ = envelope(filtered_data, 100).start()
+#     upper = upper[int(2302 * 1):-int(2302 * 0.5)]
+#     upper = upper.reshape(-1)
+#     upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
 
-# plt.figure(figsize=(8, 2))
-# for i, p in enumerate([-3, -1, 1]):
-#     bar = softdtw_barycenter(X=scaled_dataset, gamma=10 ** p)
-#     plt.subplot(1, 3, i + 1)
-#     for ts in scaled_dataset:
-#         plt.plot(ts.ravel(), "k-", alpha=.2)
-#     plt.plot(bar.ravel(), "r-")
+#     current_time = time.time()
+#     upper = eng.smoothdata(upper, 'gaussian', 200, nargout=1)
+#     print(time.time() - current_time)
+    
+#     upper = upper[0]
+#     np.savetxt(root_3 + "/" + "FIVELXY1_" + str(idx + 1) + "_smooth.csv", upper[::50])
+#     var_upper = np.array(upper).astype(float)
+#     rhythm_number = 6
+    
+#     current_time = time.time()
+#     win = window_var(data=var_upper, head=rhythm_number, window=10)
+#     end_points, _ = win.start()
+#     # win.plot_()
+#     end_points = np.sort(end_points)
+#     end_points = end_points[1::2]
+#     print(time.time() - current_time)
+    
+#     current_time = time.time()
+#     start_points, data_time, data_seg, _time = eng.patterMatch(upper, rhythm_number, False, nargout=4)
+#     # show(raw_time=_time[0], raw_data=upper, start_time=data_time, start_seg=data_seg)
+#     if not isinstance(start_points, (float)):
+#         start_points = np.array(start_points[0])
+#     else:
+#         start_points = np.array(start_points)
+#     print(time.time() - current_time)
 
-# plt.tight_layout()
-# plt.show()
-
-
-
-# ev_data = np.loadtxt(root_1 + "/" + "LXY_" + '40' + "_smooth.csv")
-# plt.figure(figsize=(9,2))
-# plt.subplot(1, 3, 1)
-# plt.plot(ev_data)
-# plt.subplot(1, 3, 2)
-# sample_data = ev_data[::50]
-# plt.plot(sample_data)
-# plt.subplot(1, 3, 3)
-# recover_data = np.zeros((len(sample_data), 50))
-# for idx, item in enumerate(sample_data):
-#     recover_data[idx][:] = item
-# plt.plot(recover_data.ravel())
-# plt.show()
-
-# ev_data = matlab.double(initializer=list(ev_data), size=(1, len(ev_data)), is_complex=False)
-# smoothData = eng.smoothdata(ev_data, 'gaussian', 400, nargout=1)
-# new_start, data_time, data_seg, time = eng.patterMatch(smoothData, 3, nargout=4)
-
-# def show(raw_time, raw_data,  start_time, start_seg):
-#     plt.figure(figsize=(16, 9))
-#     plt.plot(raw_time, raw_data)
-#     plt.draw()
-#     cnt = start_time.size[0]
-#     for idx in range(cnt):
-#         plt.plot(start_time[idx], start_seg[idx])
-#         plt.draw()
-#     plt.show()
-# show(raw_time=time[0], raw_data=smoothData[0], start_time=data_time, start_seg=data_seg)
+#     features = np.append(end_points, start_points)
+#     features = np.sort(features)
+#     features = np.sort(features) - features.min()
+#     if len(features) == rhythm_number * 2:
+#         all_features.append(features.tolist())
+#         all_index.append(idx + 1)
+# np.savetxt('./data/LXY_6_raw.csv', all_features)
 
 
+from tslearn.preprocessing import TimeSeriesScalerMinMax
+from tslearn.barycenters import softdtw_barycenter
+from tslearn.utils import to_time_series_dataset
+from tslearn.metrics import dtw, soft_dtw
+import numpy as np
+legal_user = np.loadtxt('./data/LXY_6_raw.csv')
+#   随机选取八个作为训练样本
+sample_index = []
+while True:
+    if len(sample_index) >= 8:
+        break
+    idx = np.random.randint(0, len(legal_user))
+    if idx not in sample_index:
+        sample_index.append(idx)
+#   预测
+train_data = legal_user[sample_index]
+np.savetxt('./data/LXY_6_train.csv', train_data)
+clf = one_class_svm(train_path='./data/LXY_6_train.csv')
+clf.train_()
+cnt = 0
+for i in range(len(legal_user)):
+    if clf.predict_(legal_user[i].reshape(1, -1)) == 1:
+        cnt += 1
+print('合法用户测试准确率： ', cnt/(len(legal_user)))
+cnt = 0
+attacker = np.loadtxt('./data/MS_3_raw.csv')
+for i in range(len(attacker)):
+    if clf.predict_(attacker[i].reshape(1, -1)) == -1:
+        cnt += 1
+print('非法用户测试准确率： ', cnt/(len(attacker)))
 
-# eng.eval("ev_data = csvread('envelope_data_3.csv');", nargout=0)
-# eng.eval("time = 1/2302:1/2302:length(ev_data)/2302;", nargout=0)
-# eng.eval("C = smoothdata(ev_data, 'gaussian', 400);", nargout=0)
-# D = eng.workspace["C"]
-# plt.plot(D)
-# plt.show()
+#   数据增强样本进行训练
+# from utils.softdtw import SoftDBA
+# from utils.modify_features import *
+# eng = matlab.engine.start_matlab()
+# rhythm_number = 6
+# gross = []
+# for idx in range(8):
+#     if (idx + 1) < 10:
+#         end = '0' + str(idx + 1)
+#     else:
+#         end = str(idx + 1)
+#     path = root_3 + "/" + "FIVELXY1_" + str(idx + 1) + "_smooth.csv"
+#     data = np.loadtxt(path, delimiter=",")
+#     gross.append(data)
+# G = SoftDBA(raw_data=gross, generate_num=20)
+# generated_data = G.run()
+# train_data = list(train_data)
+# for upper in generated_data:
+#     upper = upper.reshape(-1)
+#     upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+#     upper = upper[0]
+#     var_upper = np.array(upper).astype(float)
+#     end_points, _ = window_var(data=var_upper, head=rhythm_number, window=5).start(distance=20)
+#     end_points = np.sort(end_points)
+#     end_points = end_points[1::2]
+#     start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, True, nargout=4)
+#     if not isinstance(start_points, (float)):
+#         start_points = np.array(start_points[0])
+#     else:
+#         start_points = np.array(start_points)
+#     features = np.append(end_points, start_points)
+#     features = np.sort(features) * 50
+#     features = features - features.min()
+#     if len(features) == rhythm_number * 2:
+#         train_data.append(features)
 
+# gross_data = np.array(train_data)
+# np.savetxt('./data/LXY_6_ArgumentTrain.csv', train_data)
+
+clf = one_class_svm(train_path='./data/LXY_6_ArgumentTrain.csv')
+clf.train_()
+cnt = 0
+for i in range(len(legal_user)):
+    if clf.predict_(legal_user[i].reshape(1, -1)) == 1:
+        cnt += 1
+print('合法用户测试准确率(数据增强): ', cnt/(len(legal_user)))
+cnt = 0
+attacker = np.loadtxt('./data/MS_3_raw.csv')
+for i in range(len(attacker)):
+    if clf.predict_(attacker[i].reshape(1, -1)) == -1:
+        cnt += 1
+print('非法用户测试准确率(数据增强): ', cnt/(len(attacker)))

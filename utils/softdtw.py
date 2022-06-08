@@ -5,7 +5,7 @@ from tslearn.utils import to_time_series_dataset, to_time_series
 from tslearn.metrics import dtw, soft_dtw
 import matplotlib.pyplot as plt
 import numpy as np
-from modify_features import *
+from .modify_features import *
 import matlab.engine
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False

@@ -6,19 +6,14 @@
 # @File    : Link_Watch.py
 # @Software: PyCharm
 
-from curses import window
 import bluetooth
-import os
 from pprint import pprint
-import sys
 from threading import Thread
-import serial
 from utils.modify_features import *
 from utils.envelope_process import envelope
 from utils.classifier import one_class_svm
 import numpy as np
 from utils.variance import window_var
-from utils.patternmatch import pattern_match
 from utils.adc_collect import collect_data
 import time
 import matlab.engine
@@ -35,6 +30,7 @@ def get_features(collector: collect_data):
         upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)   #   数据进行平滑处理
         upper = upper[0]
         var_upper = np.array(upper).astype(float)
+        sample_data = var_upper[::50]
         rhythm_number = collector.get_rhythm_number(enveloped_data=var_upper)   #   获得节奏数
         end_points, _ = window_var(data=var_upper, head=rhythm_number, window=10).start(distance=800)  #   最大值之间距离设置为800
         end_points = np.sort(end_points)
@@ -53,7 +49,7 @@ def get_features(collector: collect_data):
             print('重新输入.')
             time.sleep(3)
 
-    return features
+    return features, sample_data, rhythm_number
 
 # Find devices with bluetooth opening nearby
 def print_devices():
@@ -123,10 +119,34 @@ class recieve_data(Thread):
                 self.collector.ser.write('d'.encode())
 
                 gross_data = []
+                raw_data = []
                 for _ in range(measure_cnt):
-                    features = get_features(self.collector)
+                    features, sample_data, rhythm_number = get_features(self.collector)
                     self.collector.ser.write('T'.encode())
                     gross_data.append(features)
+                    raw_data.append(sample_data)
+
+                G = SoftDBA(raw_data=raw_data, generate_num=10)
+                generated_data = G.run()
+
+                for upper in generated_data:
+                    upper = upper.reshape(-1)
+                    upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+                    upper = upper[0]
+                    var_upper = np.array(upper).astype(float)
+                    end_points, _ = window_var(data=var_upper, head=rhythm_number, window=5).start(distance=20)
+                    end_points = np.sort(end_points)
+                    end_points = end_points[1::2]
+                    start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, False, nargout=4)
+                    if not isinstance(start_points, (float)):
+                        start_points = np.array(start_points[0])
+                    else:
+                        start_points = np.array(start_points)
+                    features = np.append(end_points, start_points)
+                    features = np.sort(features) * 50
+                    features = features - features.min()
+                    gross_data.append(features)
+
                 gross_data = np.array(gross_data)
                 add_modify(add_data=gross_data, add_name=self.name)
 

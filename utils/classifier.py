@@ -31,13 +31,13 @@ class one_class_svm:
         # 训练之前需要将zero特征进行修改
         x_train = process_features(self.df.values)
         self.clf.fit(x_train)
-        self.y_train = np.ones(len(x_train))
-        self.y_pred_train = self.clf.predict(x_train)
-        y_pred_train = pd.DataFrame(list(self.y_pred_train), columns=['predict'])
+        # self.y_train = np.ones(len(x_train))
+        # self.y_pred_train = self.clf.predict(x_train)
+        # y_pred_train = pd.DataFrame(list(self.y_pred_train), columns=['predict'])
 
-        # legal visitors accuracy
-        train_accuracy = y_pred_train[y_pred_train['predict'] == 1].shape[0] / y_pred_train.shape[0]
-        print(f'Training Data Accuracy(Positive): {train_accuracy}')
+        # # legal visitors accuracy
+        # train_accuracy = y_pred_train[y_pred_train['predict'] == 1].shape[0] / y_pred_train.shape[0]
+        # print(f'Training Data Accuracy(Positive): {train_accuracy}')
         path = './model'
         os.makedirs(path, exist_ok=True)
         with open('./model/clf.pickle', 'wb') as f:
@@ -50,7 +50,7 @@ class one_class_svm:
 
         processed_data = np.zeros(self.columns)
         processed_data[:uncertified_person.shape[1]] = uncertified_person
-        processed_data = processed_data.reshape(1, -1)
+        processed_data = process_features(processed_data.reshape(1, -1))
         return self.clf.predict(processed_data)
         # with open('./model/clf.pickle', 'rb') as f:
         #     self.clf = pickle.load(f)
