@@ -71,7 +71,7 @@ class envelope:
         return self.y_upper, self.y_lower
 
 if __name__=='__main__':
-    data = np.loadtxt('random_data.csv', delimiter=',').reshape(1, -1)
+    data = np.loadtxt('filtered_random_data.csv', delimiter=',').reshape(1, -1)
     nx = data.shape[1]
     x = np.linspace(0, nx, nx, endpoint=False)
     env = envelope(data, 100)
@@ -80,4 +80,4 @@ if __name__=='__main__':
     plt.plot(x, upper)
     plt.grid()
     plt.show()
-    np.savetxt('./envelope_data_3.csv', upper)
+    np.savetxt('./envelope_data.csv', upper)

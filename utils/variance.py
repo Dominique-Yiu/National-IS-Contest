@@ -31,6 +31,8 @@ class window_var:
         self.biggest_peaks_index = np.argsort(self.peaks)[::-1][0:self.head]
         self.biggest_peaks = self.peaks[self.biggest_peaks_index]
         self.biggest_peaks_index = self.peaks_index[self.biggest_peaks_index]
+        self.all = np.sort(self.biggest_peaks_index)
+        self.points = self.data[self.all]
         half = np.argsort(self.biggest_peaks_index)[1::2]
         self.end_points  = self.biggest_peaks[half]
         self.end_points_index  = self.biggest_peaks_index[half]
@@ -50,8 +52,19 @@ class window_var:
         ax.legend(lines, ['envelope data', 'variance'])
         ax.grid()
         plt.show()
+    
+    def plot_point(self):
+        fig = plt.figure(figsize=(10, 8), dpi=80)
+        ax = fig.add_subplot(111)
+        lin1 = ax.plot(self.data)
 
+        ax.scatter(self.all, self.points, marker='o', color='g', s=200)
+        lines = lin1
+        ax.legend(lines, ['envelope data'])
+        ax.grid()
+        plt.show()
 
-# var = window_var('envelope_data_3.csv', head=3)
-# var.start()
-# var.plot_()
+if __name__=='__main__':
+    var = window_var('envelope_data.csv', head=4)
+    var.start()
+    var.plot_()

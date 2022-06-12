@@ -9,11 +9,11 @@ import csv
 import time
 import numpy as np
 import serial
-from filter import iir_design_filter
+from .filter import iir_design_filter
 
 
 class collect_data:
-    def __init__(self, port='COM3', rate=115200, m_time=20):
+    def __init__(self, port='COM4', rate=115200, m_time=20):
         self.env_intensity = None
         self.serial_port = port
         self.serial_rate = rate
@@ -103,6 +103,6 @@ if __name__=='__main__':
     L_path = 'YCW4_20.csv'
     S_path = 'filtered_random_data.csv'
     adc = collect_data()
-    adc.start(load_path=L_path, save_path=S_path, m_time=15)
+    adc.start(save_path=S_path, m_time=15)
     # adc.get_env_intensity()
     adc.filter.plot_()

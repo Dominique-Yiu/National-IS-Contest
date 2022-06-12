@@ -18,6 +18,7 @@ from utils.adc_collect import collect_data
 import time
 import matlab.engine
 from utils.softdtw import SoftDBA
+import matplotlib.pyplot as plt
 eng = matlab.engine.start_matlab()
 
 def get_features(collector: collect_data):
@@ -32,15 +33,13 @@ def get_features(collector: collect_data):
         var_upper = np.array(upper).astype(float)
         sample_data = var_upper[::50]
         rhythm_number = collector.get_rhythm_number(enveloped_data=var_upper)   #   获得节奏数
-        end_points, _ = window_var(data=var_upper, head=rhythm_number, window=10).start(distance=800)  #   最大值之间距离设置为800
-        end_points = np.sort(end_points)
-        end_points = end_points[1::2]
-        start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, False, nargout=4)
-        if not isinstance(start_points, (float)):
-            start_points = np.array(start_points[0])
-        else:
-            start_points = np.array(start_points)
-        features = np.append(end_points, start_points)
+        # end_points, _ = window_var(data=var_upper, head=rhythm_number, window=10).start(distance=800)  #   最大值之间距离设置为800
+        # end_points = np.sort(end_points)
+        # end_points = end_points[1::2]
+        # start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, False, nargout=4)
+        win = window_var(data=var_upper, head=rhythm_number, window=10)
+        win.start(distance=800)
+        features = win.all
         features = np.sort(features) - features.min()
         if len(features) == rhythm_number * 2:
             break
@@ -134,18 +133,13 @@ class recieve_data(Thread):
                     upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
                     upper = upper[0]
                     var_upper = np.array(upper).astype(float)
-                    end_points, _ = window_var(data=var_upper, head=rhythm_number, window=5).start(distance=20)
-                    end_points = np.sort(end_points)
-                    end_points = end_points[1::2]
-                    start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, False, nargout=4)
-                    if not isinstance(start_points, (float)):
-                        start_points = np.array(start_points[0])
-                    else:
-                        start_points = np.array(start_points)
-                    features = np.append(end_points, start_points)
+                    win = window_var(data=var_upper, head=rhythm_number, window=5)
+                    win.start(distance=20)
+                    features = win.all
                     features = np.sort(features) * 50
                     features = features - features.min()
-                    gross_data.append(features)
+                    if len(features) == rhythm_number * 2:
+                        gross_data.append(features)
 
                 gross_data = np.array(gross_data)
                 add_modify(add_data=gross_data, add_name=self.name)

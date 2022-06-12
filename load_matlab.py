@@ -29,7 +29,16 @@ root_3 = "six_seven/FIVELXY1"
 root_4 = "six_seven/FIVELXY2"
 root_5 = "six_seven/FIVEMS1"
 root_6 = "six_seven/FIVEMS2"
-# eng = matlab.engine.start_matlab()
+eng = matlab.engine.start_matlab()
+upper = np.loadtxt('envelope_data.csv')
+upper = upper[int(2302 * 1):-int(2302 * 0.5)]
+upper = upper.reshape(-1)
+upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)
+var_upper = np.array(upper[0]).astype(float)
+win = window_var(data=var_upper, head=4, window=10)
+end_points, _ = win.start()
+win.plot_point()
 
 # all_features = []
 # all_index = []
@@ -88,7 +97,7 @@ from tslearn.barycenters import softdtw_barycenter
 from tslearn.utils import to_time_series_dataset
 from tslearn.metrics import dtw, soft_dtw
 import numpy as np
-legal_user = np.loadtxt('./data/LXY_6_raw.csv')
+legal_user = np.loadtxt('./data/LXY_3_raw.csv')
 #   随机选取八个作为训练样本
 sample_index = []
 while True:
@@ -99,8 +108,8 @@ while True:
         sample_index.append(idx)
 #   预测
 train_data = legal_user[sample_index]
-np.savetxt('./data/LXY_6_train.csv', train_data)
-clf = one_class_svm(train_path='./data/LXY_6_train.csv')
+np.savetxt('./data/LXY_3_train.csv', train_data)
+clf = one_class_svm(train_path='./data/LXY_3_train.csv')
 clf.train_()
 cnt = 0
 for i in range(len(legal_user)):
@@ -153,7 +162,7 @@ print('非法用户测试准确率： ', cnt/(len(attacker)))
 # gross_data = np.array(train_data)
 # np.savetxt('./data/LXY_6_ArgumentTrain.csv', train_data)
 
-clf = one_class_svm(train_path='./data/LXY_6_ArgumentTrain.csv')
+clf = one_class_svm(train_path='./data/LXY_3_ArgumentTrain.csv')
 clf.train_()
 cnt = 0
 for i in range(len(legal_user)):

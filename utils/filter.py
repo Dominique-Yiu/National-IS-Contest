@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 
 class iir_design_filter:
-    def __init__(self, sample_rate=2302, f_pass=40.0, f_stop=48.0, a_pass=1.0, a_stop=80.0):
+    def __init__(self, sample_rate=2302, f_pass=10.0, f_stop=200.0, a_pass=1.0, a_stop=100.0):
         self.sample_rate = sample_rate
         self.f_pass = f_pass
         self.f_stop = f_stop
