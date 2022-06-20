@@ -23,73 +23,60 @@ def show(raw_time, raw_data,  start_time, start_seg):
         plt.draw()
     plt.show()
 
-root_1 = "three/LXY_两快一慢"
-root_2 = "three/马爽_两慢一快"
-root_3 = "six_seven/FIVELXY1"
-root_4 = "six_seven/FIVELXY2"
-root_5 = "six_seven/FIVEMS1"
-root_6 = "six_seven/FIVEMS2"
+root_1 = "raw_data/one_rhythm/true"
+root_2 = "raw_data/two_rhythm/true"
+root_3 = "raw_data/three_rhythm"
+root_4 = "raw_data/four_rhythm/true"
+root_5 = "raw_data/five_rhythm/true"
+root_6 = "raw_data/six_rhythm"
+
+
 eng = matlab.engine.start_matlab()
-upper = np.loadtxt('envelope_data.csv')
-upper = upper[int(2302 * 1):-int(2302 * 0.5)]
-upper = upper.reshape(-1)
-upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
-upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)
-var_upper = np.array(upper[0]).astype(float)
-win = window_var(data=var_upper, head=4, window=10)
-end_points, _ = win.start()
-win.plot_point()
 
-# all_features = []
-# all_index = []
-# ''' 提取出所有原始特征 '''
-# for idx in range(20):
-#     if (idx + 1) < 10:
-#         end = '0' + str(idx + 1)
-#     else:
-#         end = str(idx + 1)
-#     path = root_3 + "/" + "FIVELXY1_" + str(idx + 1) + ".csv"
-#     data = np.loadtxt(path, delimiter=",")
-#     filter_module = iir_design_filter()
-#     filtered_data = filter_module.filter_(raw_data=data)
-#     upper, _ = envelope(filtered_data, 100).start()
-#     upper = upper[int(2302 * 1):-int(2302 * 0.5)]
-#     upper = upper.reshape(-1)
-#     upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
 
-#     current_time = time.time()
-#     upper = eng.smoothdata(upper, 'gaussian', 200, nargout=1)
-#     print(time.time() - current_time)
-    
-#     upper = upper[0]
-#     np.savetxt(root_3 + "/" + "FIVELXY1_" + str(idx + 1) + "_smooth.csv", upper[::50])
-#     var_upper = np.array(upper).astype(float)
-#     rhythm_number = 6
-    
-#     current_time = time.time()
-#     win = window_var(data=var_upper, head=rhythm_number, window=10)
-#     end_points, _ = win.start()
-#     # win.plot_()
-#     end_points = np.sort(end_points)
-#     end_points = end_points[1::2]
-#     print(time.time() - current_time)
-    
-#     current_time = time.time()
-#     start_points, data_time, data_seg, _time = eng.patterMatch(upper, rhythm_number, False, nargout=4)
-#     # show(raw_time=_time[0], raw_data=upper, start_time=data_time, start_seg=data_seg)
-#     if not isinstance(start_points, (float)):
-#         start_points = np.array(start_points[0])
-#     else:
-#         start_points = np.array(start_points)
-#     print(time.time() - current_time)
 
-#     features = np.append(end_points, start_points)
-#     features = np.sort(features)
-#     features = np.sort(features) - features.min()
-#     if len(features) == rhythm_number * 2:
-#         all_features.append(features.tolist())
-#         all_index.append(idx + 1)
-# np.savetxt('./data/LXY_6_raw.csv', all_features)
+def extract_feature(root, num, indent='', head=None, rhythm_number=None, output_file=None):
+    all_features = []
+    for idx in range(num):
+        if (idx + 1) < 10:
+            end = indent + str(idx + 1)
+        else:
+            end = str(idx + 1)
+        path = root + "/" + head + end + ".csv"
+        data = np.loadtxt(path, delimiter=",")
+        filter_module = iir_design_filter(f_pass=40.0, f_stop=48.0, a_pass=1.0, a_stop=80.0)
+        filtered_data = filter_module.filter_(raw_data=data)
+        # filter_module.plot_()
+        upper, _ = envelope(filtered_data, 100).start()
+        upper = upper[int(2302 * 1.25):-int(2302 * 0.5)]
+        upper = upper.reshape(-1)
+        upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+        upper = eng.smoothdata(upper, 'gaussian', 10, nargout=1)
+        upper = upper[0]
+        np.savetxt(root + "/" + head + end + "_smooth.csv", upper[::50])
+        var_upper = np.array(upper).astype(float)
+    
+        win = window_var(data=var_upper, head=rhythm_number, window=10)
+        end_points, _ = win.start(distance=800)
+        # win.plot_()
+        end_points = np.sort(end_points)
+        end_points = end_points[1::2]
+        start_points, data_time, data_seg, _time = eng.patterMatch(upper, rhythm_number, False, nargout=4)
+        # show(raw_time=_time[0], raw_data=upper,  start_time=data_time, start_seg=data_seg)
+        if not isinstance(start_points, (float)):
+            start_points = np.array(start_points[0])
+        features = np.append(end_points, start_points)
+        features = np.sort(features) - features.min()
+        if len(features) == rhythm_number * 2:
+            all_features.append(features.tolist())
+    np.savetxt(output_file, all_features)
+
+# extract_feature(root=root_1, num=55, head='one_', rhythm_number=1, output_file='data/one_raw.csv')
+# extract_feature(root=root_2, num=55, head='two_', rhythm_number=2, output_file='data/two_raw.csv')
+# extract_feature(root=root_3, num=55, head='LXY_', indent='0', rhythm_number=3, output_file='data/three_raw.csv')
+# extract_feature(root=root_4, num=60, head='four_', rhythm_number=4, output_file='data/four_raw.csv')
+# extract_feature(root=root_5, num=55, head='five_', rhythm_number=5, output_file='data/five_raw.csv')
+# extract_feature(root=root_6, num=55, head='ms_sixtrue_data', rhythm_number=6, output_file='data/six_raw.csv')
 
 
 from tslearn.preprocessing import TimeSeriesScalerMinMax
@@ -97,81 +84,181 @@ from tslearn.barycenters import softdtw_barycenter
 from tslearn.utils import to_time_series_dataset
 from tslearn.metrics import dtw, soft_dtw
 import numpy as np
-legal_user = np.loadtxt('./data/LXY_3_raw.csv')
-#   随机选取八个作为训练样本
-sample_index = []
-while True:
-    if len(sample_index) >= 8:
-        break
-    idx = np.random.randint(0, len(legal_user))
-    if idx not in sample_index:
-        sample_index.append(idx)
-#   预测
-train_data = legal_user[sample_index]
-np.savetxt('./data/LXY_3_train.csv', train_data)
-clf = one_class_svm(train_path='./data/LXY_3_train.csv')
-clf.train_()
-cnt = 0
-for i in range(len(legal_user)):
-    if clf.predict_(legal_user[i].reshape(1, -1)) == 1:
-        cnt += 1
-print('合法用户测试准确率： ', cnt/(len(legal_user)))
-cnt = 0
-attacker = np.loadtxt('./data/MS_3_raw.csv')
-for i in range(len(attacker)):
-    if clf.predict_(attacker[i].reshape(1, -1)) == -1:
-        cnt += 1
-print('非法用户测试准确率： ', cnt/(len(attacker)))
+from utils.softdtw import SoftDBA
+from utils.modify_features import *
+import random
 
-#   数据增强样本进行训练
-# from utils.softdtw import SoftDBA
-# from utils.modify_features import *
-# eng = matlab.engine.start_matlab()
-# rhythm_number = 6
-# gross = []
-# for idx in range(8):
-#     if (idx + 1) < 10:
-#         end = '0' + str(idx + 1)
-#     else:
-#         end = str(idx + 1)
-#     path = root_3 + "/" + "FIVELXY1_" + str(idx + 1) + "_smooth.csv"
-#     data = np.loadtxt(path, delimiter=",")
-#     gross.append(data)
-# G = SoftDBA(raw_data=gross, generate_num=20)
-# generated_data = G.run()
-# train_data = list(train_data)
-# for upper in generated_data:
-#     upper = upper.reshape(-1)
-#     upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
-#     upper = upper[0]
-#     var_upper = np.array(upper).astype(float)
-#     end_points, _ = window_var(data=var_upper, head=rhythm_number, window=5).start(distance=20)
-#     end_points = np.sort(end_points)
-#     end_points = end_points[1::2]
-#     start_points, _, _, _ = eng.patterMatch(upper, rhythm_number, True, nargout=4)
-#     if not isinstance(start_points, (float)):
-#         start_points = np.array(start_points[0])
-#     else:
-#         start_points = np.array(start_points)
-#     features = np.append(end_points, start_points)
-#     features = np.sort(features) * 50
-#     features = features - features.min()
-#     if len(features) == rhythm_number * 2:
-#         train_data.append(features)
+def generate_argTrain_data(path, num=5, rhythm_number=None, root=None, head=None, indent='', save_path=None):
+    legal_user = np.loadtxt(path)
+    sample_index = []
+    while True:
+        if len(sample_index) >= num:
+            break
+        idx = np.random.randint(0, len(legal_user))
+        if idx not in sample_index:
+            sample_index.append(idx)
 
-# gross_data = np.array(train_data)
-# np.savetxt('./data/LXY_6_ArgumentTrain.csv', train_data)
+    train_data = legal_user[sample_index]
+    #   数据增强样本进行训练
+    gross = []
+    for idx in sample_index:
+        if (idx + 1) < 10:
+            end = indent + str(idx + 1)
+        else:
+            end = str(idx + 1)
+        path = root + "/" + head + end + "_smooth.csv"
+        data = np.loadtxt(path, delimiter=",")
+        gross.append(data)
 
-clf = one_class_svm(train_path='./data/LXY_3_ArgumentTrain.csv')
-clf.train_()
-cnt = 0
-for i in range(len(legal_user)):
-    if clf.predict_(legal_user[i].reshape(1, -1)) == 1:
-        cnt += 1
-print('合法用户测试准确率(数据增强): ', cnt/(len(legal_user)))
-cnt = 0
-attacker = np.loadtxt('./data/MS_3_raw.csv')
-for i in range(len(attacker)):
-    if clf.predict_(attacker[i].reshape(1, -1)) == -1:
-        cnt += 1
-print('非法用户测试准确率(数据增强): ', cnt/(len(attacker)))
+    G = SoftDBA(raw_data=gross, generate_num=20)
+
+    for idx, ts in enumerate(G.data):
+        if idx == 0:
+            plt.plot(ts.ravel(), "k-", label='原始数据', alpha=.2)
+        else:
+            plt.plot(ts.ravel(), "k-", alpha=.2)
+
+    generated_data = G.run()
+
+    for idx, bar in enumerate(generated_data):
+        if idx == 0:
+            plt.plot(bar.ravel(), "r-", label='合成数据', alpha=.5)
+        else:
+            plt.plot(bar.ravel(), "r-", alpha=.5)
+
+    # plt.show()
+
+    train_data = list(train_data)
+    for upper in generated_data:
+        upper = upper.reshape(-1)
+        upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+        upper = upper[0]
+
+        var_upper = np.array(upper).astype(float)
+    
+        win = window_var(data=var_upper, head=rhythm_number, window=5)
+        end_points, _ = win.start(distance=20)
+        end_points = np.sort(end_points)
+        end_points = end_points[1::2]
+        start_points, data_time, data_seg, _time = eng.patterMatch(upper, rhythm_number, True, nargout=4)
+        if not isinstance(start_points, (float)):
+            start_points = np.array(start_points[0])
+        features = np.append(end_points, start_points)
+        features = np.sort(features) * 50
+        features = features - features.min()
+        if len(features) == rhythm_number * 2:
+            train_data.append(features)
+
+    gross_data = np.array(train_data)
+    np.savetxt(save_path, gross_data)
+
+# generate_argTrain_data(path='data/one_raw.csv', num=8, rhythm_number=1, root=root_1, head='one_', save_path='data/one_arg.csv')
+# generate_argTrain_data(path='data/two_raw.csv', num=8, rhythm_number=2, root=root_2, head='two_', save_path='data/two_arg.csv')
+# generate_argTrain_data(path='data/three_raw.csv', num=8, rhythm_number=3, root=root_3, head='LXY_', indent='0', save_path='data/three_arg.csv')
+# generate_argTrain_data(path='data/four_raw.csv',  num=8, rhythm_number=4, root=root_4, head='four_', save_path='data/four_arg.csv')
+# generate_argTrain_data(path='data/five_raw.csv', num=8, rhythm_number=5, root=root_5, head='five_', save_path='data/five_arg.csv')
+
+
+
+arg_list = ['data/one_arg.csv', 'data/two_arg.csv', 'data/three_arg.csv', 'data/four_arg.csv', 'data/five_arg.csv']
+raw_list = ['data/one_raw.csv', 'data/two_raw.csv', 'data/three_raw.csv', 'data/four_raw.csv', 'data/five_raw.csv']
+def show_result(idx):
+
+    clf = one_class_svm(train_path=arg_list[idx])
+    clf.train_()
+    cnt = 0
+    legal_user = np.loadtxt(raw_list[idx])
+    for i in range(len(legal_user)):
+        if clf.predict_(legal_user[i].reshape(1, -1)) == 1:
+            cnt += 1
+    print('合法用户测试准确率(数据增强): ', cnt / len(legal_user))
+
+    cnt = 0
+    SUM = 0
+    for i in range(5):
+        if i != idx:
+            attacker = np.loadtxt(raw_list[i])
+            SUM += len(attacker)
+            for i in range(len(attacker)):
+                if clf.predict_(attacker[i].reshape(1, -1)) == -1:
+                    cnt += 1
+    print('非法用户测试准确率(数据增强): ', cnt/SUM)
+
+# show_result(0)
+# show_result(1)
+# show_result(2)
+# show_result(3)
+# show_result(4)
+
+def show_legal_user_result(idx):
+
+    clf = one_class_svm(train_path=arg_list[idx])
+    clf.train_()
+    cnt = 0
+    legal_user = np.loadtxt(raw_list[idx])
+
+    idx = [item for item in range(len(legal_user))]
+    random.shuffle(idx)
+    idx = idx[:30]
+    sample_legal_user = legal_user[idx]
+    reshaped_sample = [[item for item in sample_legal_user[i * 3:i * 3 + 3]]for i in range(10)]
+    result = np.zeros((10, 3))
+    for i in range(10):
+        for j in range(3):
+            result[i, j] = clf.predict_(reshaped_sample[i][j].reshape(1, -1))
+    
+    one_time = result[:, :1].reshape(-1, 1)
+    two_time = result[:, :2].reshape(-1, 2)
+    three_time = result[:, :3].reshape(-1, 3)
+
+    cnt_1 = 0
+    cnt_2 = 0
+    cnt_3 = 0
+    for i in range(10):
+        if 1 in one_time[i]:
+                cnt_1 += 1
+        if 1 in two_time[i]:
+                cnt_2 += 1
+        if 1 in three_time[i]:
+                cnt_3 += 1
+    print(f'一次成功的概率{cnt_1 * 10}%')
+    print(f'两次成功的概率{cnt_2 * 10}%')
+    print(f'三次成功的概率{cnt_3 * 10}%')
+
+# show_legal_user_result(0)
+# show_legal_user_result(1)
+# show_legal_user_result(2)
+# show_legal_user_result(3)
+# show_legal_user_result(4)
+
+# %%
+'''shouder attack'''
+def shoulder_attack_result(train_path, test_path, distance):
+    clf = one_class_svm(train_path=train_path)
+    clf.train_()
+    cnt = 0
+    illegal_user = np.loadtxt(test_path)
+    for i in range(len(illegal_user)):
+        if clf.predict_(illegal_user[i].reshape(1, -1)) == 1:
+            cnt += 1
+    print(f'在{distance}m距离下, 肩窥攻击的成功率{100 * cnt / len(illegal_user)}%')
+
+# extract_feature(root="raw_data/shoulder_attack", num=5, head='shoulder_true_', indent='0', rhythm_number=4, output_file='data/four_shoulder_true.csv')
+# extract_feature(root="raw_data/shoulder_attack", num=5, head='shoulder1_true_', indent='0', rhythm_number=4, output_file='data/four_shoulder1_true.csv')
+# extract_feature(root="raw_data/shoulder_attack", num=5, head='shoulder2_true_', indent='0', rhythm_number=4, output_file='data/four_shoulder2_true.csv')
+# extract_feature(root="raw_data/shoulder_attack", num=4, head='shoulder4_true_', indent='0', rhythm_number=4, output_file='data/four_shoulder4_true.csv')
+
+# extract_feature(root="raw_data/shoulder_attack", num=3, head='shoulder_false_', indent='0', rhythm_number=4, output_file='data/four_shoulder_false.csv')
+# extract_feature(root="raw_data/shoulder_attack", num=3, head='shoulder1_false_', indent='0', rhythm_number=4, output_file='data/four_shoulder1_false.csv')
+# extract_feature(root="raw_data/shoulder_attack", num=3, head='shoulder2_false_', indent='0', rhythm_number=4, output_file='data/four_shoulder2_false.csv')
+# extract_feature(root="raw_data/shoulder_attack", num=3, head='shoulder4_false_', indent='0', rhythm_number=4, output_file='data/four_shoulder4_false.csv')
+
+generate_argTrain_data(path='data/four_shoulder_true.csv', num=5, rhythm_number=4, root="raw_data/shoulder_attack", head='shoulder_true_', indent='0', save_path='data/four_shoulder_true_arg.csv')
+generate_argTrain_data(path='data/four_shoulder1_true.csv', num=5, rhythm_number=4, root="raw_data/shoulder_attack", head='shoulder1_true_', indent='0', save_path='data/four_shoulder1_true_arg.csv')
+generate_argTrain_data(path='data/four_shoulder2_true.csv', num=5, rhythm_number=4, root="raw_data/shoulder_attack", head='shoulder2_true_', indent='0', save_path='data/four_shoulder2_true_arg.csv')
+generate_argTrain_data(path='data/four_shoulder4_true.csv', num=4, rhythm_number=4, root="raw_data/shoulder_attack", head='shoulder4_true_', indent='0', save_path='data/four_shoulder4_true_arg.csv')
+
+shoulder_attack_result('data/four_shoulder_true_arg.csv', 'data/four_shoulder_false.csv', 0.5)
+shoulder_attack_result('data/four_shoulder1_true_arg.csv', 'data/four_shoulder1_false.csv', 1)
+shoulder_attack_result('data/four_shoulder2_true_arg.csv', 'data/four_shoulder2_false.csv', 2)
+shoulder_attack_result('data/four_shoulder4_true_arg.csv', 'data/four_shoulder4_false.csv', 4)

@@ -15,7 +15,7 @@ def process_features(data):
 
 
 class one_class_svm:
-    def __init__(self, train_path='./output_data/gross_features.csv', test_path=None, nu=0.1, kernel="rbf", gamma='scale',
+    def __init__(self, train_path='data/gross_features.csv', test_path=None, nu=0.1, kernel="rbf", gamma='scale',
                  test_size=0.3, random_state=2021):
         self.y_train = None
         self.y_pred_train = None
@@ -44,16 +44,19 @@ class one_class_svm:
             pickle.dump(self.clf, f)
 
     def predict_(self, uncertified_person):
+        self.df = pd.read_csv(self.train_path, sep=' ', header=None)
+        self.columns = self.df.shape[1]
         # data with a length which is bigger than self.columns is an illegal user
-        if len(uncertified_person) > self.columns:
+        with open('model/clf.pickle', 'rb') as f:
+            self.clf = pickle.load(f)
+
+        if len(uncertified_person.reshape(-1)) > self.columns:
             return -1
 
         processed_data = np.zeros(self.columns)
         processed_data[:uncertified_person.shape[1]] = uncertified_person
         processed_data = process_features(processed_data.reshape(1, -1))
         return self.clf.predict(processed_data)
-        # with open('./model/clf.pickle', 'rb') as f:
-        #     self.clf = pickle.load(f)
         #     print(self.clf.predict(uncertified_person))
 
 if __name__=='__main__':

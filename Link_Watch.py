@@ -23,16 +23,21 @@ eng = matlab.engine.start_matlab()
 
 def get_features(collector: collect_data):
     while True:
-        filtered_data = collector.start(m_time=13)  #   定义收集13秒的ADC数据
-        upper, _ = envelope(filtered_data, 100).start() #   对数据进行包络，k=100
-        upper = upper[int(2302 * 1):-int(2302 * 0.5)]   #   去除一些硬件原因的不稳定数据
+        raw_data, filtered_data = collector.start(m_time=25)  #   定义收集13秒的ADC数据
+        raw_data = np.array(raw_data)
+        upper, _ = envelope(raw_data, 100).start() #   对数据进行包络，k=100upper
+        upper = upper[int(2302 * 1.5):-int(2302 * 0.5)]   #   去除一些硬件原因的不稳定数据
         upper = upper.reshape(-1)
         upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)  #   数据转换为matlab类型
-        upper = eng.smoothdata(upper, 'gaussian', 400, nargout=1)   #   数据进行平滑处理
+        upper = eng.smoothdata(upper, 'gaussian', 2000, nargout=1)   #   数据进行平滑处理
         upper = upper[0]
+        np.savetxt('watch1.csv', upper)
         var_upper = np.array(upper).astype(float)
         sample_data = var_upper[::50]
         rhythm_number = collector.get_rhythm_number(enveloped_data=var_upper)   #   获得节奏数
+        choice = input(f'{rhythm_number}是否需要重新测量：')
+        if choice == 'YES':
+            continue
         # end_points, _ = window_var(data=var_upper, head=rhythm_number, window=10).start(distance=800)  #   最大值之间距离设置为800
         # end_points = np.sort(end_points)
         # end_points = end_points[1::2]
@@ -98,6 +103,7 @@ class recieve_data(Thread):
         super(recieve_data, self).__init__()
         self.collector = collector
         self.clf = one_class_svm()
+        self.name = 'BOY'
         if not self.collector.ser.isOpen():
             self.collector.ser.open()
     
@@ -114,7 +120,7 @@ class recieve_data(Thread):
             if data == 'S':
                 print(data)
                 #   测量环境噪声
-                self.collector.get_env_intensity()
+                self.collector.get_env_intensity(enve=True)
                 self.collector.ser.write('d'.encode())
 
                 gross_data = []
@@ -124,7 +130,7 @@ class recieve_data(Thread):
                     self.collector.ser.write('T'.encode())
                     gross_data.append(features)
                     raw_data.append(sample_data)
-
+                print(gross_data)
                 G = SoftDBA(raw_data=raw_data, generate_num=10)
                 generated_data = G.run()
 
@@ -149,15 +155,17 @@ class recieve_data(Thread):
             #   登录消息
             elif data == 'L':
                 #   测量环境噪声
-                self.collector.get_env_intensity()
+                self.collector.get_env_intensity(enve=True)
                 self.collector.ser.write('e'.encode())
 
-                features = get_features(self.collector)
+                features, _, _ = get_features(self.collector)
                 yes_or_no = self.clf.predict_(uncertified_person=features.reshape(1, -1))
-                if yes_or_no:
+                if yes_or_no == 1:
                     self.collector.ser.write('Y'.encode())
+                    print('Succeed')
                 else:
                     self.collector.ser.write('N'.encode())
+                    print('Failed')
             # print(data)
         self.collector.ser.close()
 

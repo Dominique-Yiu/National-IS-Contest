@@ -8,10 +8,12 @@
 from scipy import signal
 import numpy as np
 import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 
 
 class iir_design_filter:
-    def __init__(self, sample_rate=2302, f_pass=10.0, f_stop=200.0, a_pass=1.0, a_stop=100.0):
+    def __init__(self, sample_rate=2302, f_pass=10.0, f_stop=100.0, a_pass=1.0, a_stop=100.0):
         self.sample_rate = sample_rate
         self.f_pass = f_pass
         self.f_stop = f_stop
@@ -52,8 +54,28 @@ class iir_design_filter:
         plt.show()
 
 if __name__=='__main__':
-    L_path = 'three/LXY_两快一慢/LXY_01.csv'
+    L_path = 'raw_data/three_rhythm/LXY_01.csv'
     S_path = 'filtered_.csv'
     _filter = iir_design_filter()
-    _filter.filter_(load_path=L_path, save_path=S_path)
-    _filter.plot_()
+    filtered_data = _filter.filter_(load_path=L_path, save_path=S_path)
+    filtered_data = filtered_data * 5 / 1024
+    # _filter.plot_()
+    sampled_filterd_data = filtered_data[::50]
+    plt.figure(figsize=(16, 8))
+
+    plt.subplot(2, 1, 1)
+    plt.plot(filtered_data, label='原始数据')
+    plt.xlabel("样本个数", fontsize=25)
+    plt.ylabel("电压/V", fontsize=25)
+    plt.tick_params(labelsize=25) 
+    plt.legend(fontsize=25, loc='upper right')
+    plt.tight_layout()
+
+    plt.subplot(2, 1, 2)
+    plt.plot(sampled_filterd_data, label='重采样数据')
+    plt.xlabel("样本个数", fontsize=25)
+    plt.ylabel("电压/V", fontsize=25)
+    plt.tick_params(labelsize=25) 
+    plt.legend(fontsize=25, loc='upper right')
+    plt.tight_layout()
+    plt.show()

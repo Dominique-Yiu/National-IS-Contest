@@ -110,7 +110,7 @@ function [new_start, data_time, data_seg, time] = patterMatch(ev_value, rhythm_n
 
     j=1;
     % 计算xcorr值
-    for i= 1:100/times:length(ev_value)-1500/times
+    for i= 1:100/times:length(ev_value)-1550/times
         heng(j,:) = i:i+1500/times;
         zong = ev_value(heng(j,:));
         c(j,:) = xcorr(L,zong,'normalized');

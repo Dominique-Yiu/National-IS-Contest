@@ -71,7 +71,7 @@ def show(raw_time, raw_data,  start_time, start_seg):
 
 if __name__=='__main__':
     eng = matlab.engine.start_matlab()
-    root_1 = "three/LXY_两快一慢"
+    root_1 = "raw_data/three_rhythm"
     gross = []
     for idx in range(8):
         if (idx + 1) < 10:
@@ -82,25 +82,33 @@ if __name__=='__main__':
         data = np.loadtxt(path, delimiter=",")
         gross.append(data)
     G = SoftDBA(raw_data=gross, generate_num=10)
-    for upper in G.data:
-        upper = upper.reshape(-1)
-        upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
-        start_points, data_time, data_seg, _time = eng.patterMatch(upper, 3, True, nargout=4)
-        show(raw_time=_time[0], raw_data=upper[0], start_time=data_time, start_seg=data_seg)
-    generated_data = G.run()
-    for upper in generated_data:
-        upper = upper.reshape(-1)
-        upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
-        start_points, data_time, data_seg, _time = eng.patterMatch(upper, 3, True, nargout=4)
-        show(raw_time=_time[0], raw_data=upper[0], start_time=data_time, start_seg=data_seg)
-    # plt.figure(figsize=(16, 8))
-    # for ts in G.data:
-    #     plt.plot(ts.ravel(), "k-", alpha=.2)
+    # for upper in G.data:
+    #     upper = upper.reshape(-1)
+    #     upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+    #     start_points, data_time, data_seg, _time = eng.patterMatch(upper, 3, True, nargout=4)
+    #     show(raw_time=_time[0], raw_data=upper[0], start_time=data_time, start_seg=data_seg)
     # generated_data = G.run()
-    # for bar in generated_data:
-    #     plt.plot(bar.ravel(), "r-", alpha=.5)
-    # plt.xlabel("样本个数", fontsize=18)
-    # plt.ylabel("归一化的电磁强度", fontsize=18)  # fontsize=18为名字大小
-    # plt.tick_params(labelsize=15)  #刻度字体大小13
-    # plt.tight_layout()
-    # plt.show()
+    # for upper in generated_data:
+    #     upper = upper.reshape(-1)
+    #     upper = matlab.double(initializer=list(upper), size=(1, len(upper)), is_complex=False)
+    #     start_points, data_time, data_seg, _time = eng.patterMatch(upper, 3, True, nargout=4)
+    #     show(raw_time=_time[0], raw_data=upper[0], start_time=data_time, start_seg=data_seg)
+
+    plt.figure(figsize=(12, 6))
+    for idx, ts in enumerate(G.data):
+        if idx == 0:
+            plt.plot(ts.ravel(), "k-", label='原始数据', alpha=.2)
+        else:
+            plt.plot(ts.ravel(), "k-", alpha=.2)
+    generated_data = G.run()
+    for idx, bar in enumerate(generated_data):
+        if idx == 0:
+            plt.plot(bar.ravel(), "r-", label='合成数据', alpha=.5)
+        else:
+            plt.plot(bar.ravel(), "r-", alpha=.5)
+    plt.xlabel("样本个数", fontsize=25)
+    plt.ylabel("归一化的电磁强度", fontsize=25)  # fontsize=18为名字大小
+    plt.tick_params(labelsize=25)  #刻度字体大小13
+    plt.legend(fontsize=25, loc='upper right')
+    plt.tight_layout()
+    plt.show()

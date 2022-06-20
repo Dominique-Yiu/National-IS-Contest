@@ -1,5 +1,5 @@
 import numpy as np
-measure_cnt = 1
+measure_cnt = 8
 
 
 # %%
@@ -25,7 +25,7 @@ def delete_modify(file_path='./output_data/gross_name.csv', raw_path='./output_d
 
 
 # %%
-def add_modify(file_path='./output_data/gross_name.csv', raw_path='./output_data/gross_features.csv', data=None, add_data=None, add_name=None):
+def add_modify(file_path='data/gross_name.csv', raw_path='data/gross_features.csv', data=None, add_data=None, add_name=None):
     name_list = np.loadtxt(file_path, dtype=str)
     if data is None:
         raw_data = np.loadtxt(raw_path)
