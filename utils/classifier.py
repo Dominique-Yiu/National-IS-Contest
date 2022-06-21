@@ -60,11 +60,12 @@ class one_class_svm:
         #     print(self.clf.predict(uncertified_person))
 
 if __name__=='__main__':
+    import datetime
     clf = one_class_svm()
-    current_time = time.time()
+    current_time = datetime.datetime.now()
     clf.train_()
-    print(time.time() - current_time)
+    print(datetime.datetime.now() - current_time)
 
-    current_time = time.time()
-    clf.predict_(clf.df[0])
-    print(time.time() - current_time)
+    current_time = datetime.datetime.now()
+    clf.predict_(clf.df.values[0].reshape(1, -1))
+    print(datetime.datetime.now() - current_time)
