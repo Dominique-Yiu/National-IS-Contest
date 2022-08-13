@@ -25,12 +25,12 @@ class one_class_svm:
         self.clf = svm.OneClassSVM(nu=nu, kernel=kernel, gamma=gamma)
         self.columns = None
 
-    def train_(self):
+    def train_(self, rand=0):
         self.df = pd.read_csv(self.train_path, sep=' ', header=None)
         self.columns = self.df.shape[1]
         # 训练之前需要将zero特征进行修改
         x_train = process_features(self.df.values)
-        self.clf.fit(x_train)
+        self.clf.fit(x_train[:int(x_train.shape[0] / 2) + rand])
         # self.y_train = np.ones(len(x_train))
         # self.y_pred_train = self.clf.predict(x_train)
         # y_pred_train = pd.DataFrame(list(self.y_pred_train), columns=['predict'])

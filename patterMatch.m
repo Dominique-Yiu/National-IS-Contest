@@ -1,4 +1,4 @@
-function [new_start, data_time, data_seg, time] = patterMatch(ev_value, rhythm_number, use_sample)
+function [new_start, data_time, data_seg, time, xcorr_value] = patterMatch(ev_value, rhythm_number, use_sample)
 
     %% use_sample = false
     % Fit computation did not converge:
@@ -118,6 +118,7 @@ function [new_start, data_time, data_seg, time] = patterMatch(ev_value, rhythm_n
     end
 
     M1 = max(c,[],2);
+    xcorr_value = M1;
     [M2,M2i] = sort(M1);
     Mx = M2i(length(M2)-rhythm_number*rhythm_times:length(M2));
 

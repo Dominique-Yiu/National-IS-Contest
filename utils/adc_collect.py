@@ -9,12 +9,12 @@ import csv
 import time
 import numpy as np
 import serial
-from .filter import iir_design_filter
-from .envelope_process import envelope
+from utils.filter import iir_design_filter
+from utils.envelope_process import envelope
 
 
 class collect_data:
-    def __init__(self, port='COM8', rate=115200, m_time=20):
+    def __init__(self, port='COM3', rate=115200, m_time=20):
         self.env_intensity = None
         self.serial_port = port
         self.serial_rate = rate
@@ -118,9 +118,11 @@ class collect_data:
         return string_a, self.filter.filter_(raw_data=string_a, load_path=load_path, save_path=save_path)
 
 if __name__=='__main__':
-    S_path = 'watch1.csv'
+    S_path = 'YCW_8s_1.csv'
     # S_path = 'C:/Users/Mr.yao/Desktop/新建文件夹/ms_sixtrue_data56.csv'
-    adc = collect_data()
-    adc.start(load_path=S_path, m_time=20)
+    adc = collect_data(port='COM5')
+    adc.start(load_path=S_path, m_time=12)
     # adc.get_env_intensity()
     adc.filter.plot_()
+
+# 3 1 2 1

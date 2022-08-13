@@ -65,6 +65,6 @@ class window_var:
         plt.show()
 
 if __name__=='__main__':
-    var = window_var('envelope_data.csv', head=4)
+    var = window_var('smooth_data.csv', head=4)
     var.start()
     var.plot_()

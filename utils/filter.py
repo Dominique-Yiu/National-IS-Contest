@@ -54,7 +54,7 @@ class iir_design_filter:
         plt.show()
 
 if __name__=='__main__':
-    L_path = 'raw_data/three_rhythm/LXY_01.csv'
+    L_path = 'raw_data/three_rhythm/LXY_20.csv'
     S_path = 'filtered_.csv'
     _filter = iir_design_filter()
     filtered_data = _filter.filter_(load_path=L_path, save_path=S_path)

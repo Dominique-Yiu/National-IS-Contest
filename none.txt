@@ -1,0 +1,602 @@
+@inproceedings{xie2022teethpass,
+  title={TeethPass: Dental Occlusion-based User Authentication via In-ear Acoustic Sensing},
+  author={Xie, Yadong and Li, Fan and Wu, Yue and Chen, Huijie and Zhao, Zhiyuan and Wang, Yu},
+  booktitle={IEEE Conference on Computer Communications (IEEE INFOCOM)},
+  year={2022},
+}
+
+@inproceedings{2020TouchPass,
+  title={TouchPass: towards behavior-irrelevant on-touch user authentication on smartphones leveraging vibrations},
+  author={Xu, Xiangyu and Yu, Jiadi and Chen, Yingying and Hua, Qin and Zhu, Yanmin and Chen, Yi-Chao and Li, Minglu},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2020}
+}
+
+@inproceedings{liu2017vibwrite,
+  title={Vibwrite: Towards finger-input authentication on ubiquitous surfaces via physical vibration},
+  author={Liu, Jian and Wang, Chen and Chen, Yingying and Saxena, Nitesh},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2017}
+}
+
+@inproceedings{lee2021usable,
+  title={Usable User Authentication on a Smartwatch using Vibration},
+  author={Lee, Sunwoo and Choi, Wonsuk and Lee, Dong Hoon},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2021}
+}
+
+@inproceedings{sluganovic2016using,
+  title={Using reflexive eye movements for fast challenge-response authentication},
+  author={Sluganovic, Ivo and Roeschlin, Marc and Rasmussen, Kasper B and Martinovic, Ivan},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2016}
+}
+
+@inproceedings{li2020rf,
+  title={RF-Rhythm: Secure and usable two-factor RFID authentication},
+  author={Li, Jiawei and Wang, Chuyu and Li, Ang and Han, Dianqi and Zhang, Yan and Zuo, Jinhang and Zhang, Rui and Xie, Lei and Zhang, Yanchao},
+  booktitle={IEEE Conference on Computer Communications (IEEE INFOCOM)},
+  year={2020}
+}
+
+@inproceedings{hutchins2018beat,
+  title={Beat-pin: A user authentication mechanism for wearable devices through secret beats},
+  author={Hutchins, Ben and Reddy, Anudeep and Jin, Wenqiang and Zhou, Michael and Li, Ming and Yang, Lei},
+  booktitle={Asia Conference on Computer and Communications Security (ACM ASIACCS)},
+  year={2018}
+}
+
+@inproceedings{lu2021global,
+  title={Global Feature Analysis and Comparative Evaluation of Freestyle In-Air-Handwriting Passcode for User Authentication},
+  author={Lu, Duo and Deng, Yuli and Huang, Dijiang},
+  booktitle={Annual Computer Security Applications Conference (ACSAC)},
+  year={2021}
+}
+
+@inproceedings{song2017multi,
+  title={Multi-touch authentication using hand geometry and behavioral information},
+  author={Song, Yunpeng and Cai, Zhongmin and Zhang, Zhi-Li},
+  booktitle={IEEE Symposium on Security and Privacy (IEEE S\&P)},
+  year={2017},
+}
+
+@inproceedings{vu2012distinguishing,
+  title={Distinguishing users with capacitive touch communication},
+  author={Vu, Tam and Baid, Akash and Gao, Simon and Gruteser, Marco and Howard, Richard and Lindqvist, Janne and Spasojevic, Predrag and Walling, Jeffrey},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2012}
+}
+
+@inproceedings{zuo2019automatic,
+  title={Automatic fingerprinting of vulnerable ble iot devices with static uuids from mobile apps},
+  author={Zuo, Chaoshun and Wen, Haohuang and Lin, Zhiqiang and Zhang, Yinqian},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2019}
+}
+
+@inproceedings{shi2017smart,
+  title={Smart user authentication through actuation of daily activities leveraging WiFi-enabled IoT},
+  author={Shi, Cong and Liu, Jian and Liu, Hongbo and Chen, Yingying},
+  booktitle={ACM International Symposium on Mobile Ad Hoc Networking and Computing (ACM MobiHoc)},
+  year={2017}
+}
+
+@inproceedings{li2020t2pair,
+  title={T2pair: Secure and usable pairing for heterogeneous iot devices},
+  author={Li, Xiaopeng and Zeng, Qiang and Luo, Lannan and Luo, Tongbo},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2020}
+}
+
+@inproceedings{almulhim2018proposing,
+  title={Proposing secure and lightweight authentication scheme for IoT based E-health applications},
+  author={Almulhim, Maria and Zaman, Noor},
+  booktitle={International Conference on Advanced Communication Technology (ICACT)},
+  year={2018},
+}
+
+@inproceedings{vuagnoux2009compromising,
+  title={Compromising electromagnetic emanations of wired and wireless keyboards.},
+  author={Vuagnoux, Martin and Pasini, Sylvain},
+  booktitle={USENIX Security Symposium},
+  year={2009}
+}
+
+@inproceedings{wang2011analysis,
+  title={Analysis and measurement on the electromagnetic compromising emanations of computer keyboards},
+  author={Wang, Litao and Yu, Bin},
+  booktitle={International Conference on Computational Intelligence and Security (CIS)},
+  year={2011},
+}
+
+@inproceedings{jin2021periscope,
+  title={Periscope: A Keystroke Inference Attack Using Human Coupled Electromagnetic Emanations},
+  author={Jin, Wenqiang and Murali, Srinivasan and Zhu, Huadi and Li, Ming},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2021}
+}
+
+@inproceedings{shen2021lora,
+  title={When LoRa meets EMR: Electromagnetic covert channels can be super resilient},
+  author={Shen, Cheng and Liu, Tian and Huang, Jun and Tan, Rui},
+  booktitle={IEEE Symposium on Security and Privacy (IEEE S\&P)},
+  year={2021},
+}
+
+@inproceedings{dey2018emprof,
+  title={Emprof: Memory profiling via em-emanation in iot and hand-held devices},
+  author={Dey, Moumita and Nazari, Alireza and Zajic, Alenka and Prvulovic, Milos},
+  booktitle={IEEE/ACM International Symposium on Microarchitecture (MICRO)},
+  year={2018},
+}
+
+@inproceedings{li2019touch,
+  title={Touch well before use: Intuitive and secure authentication for iot devices},
+  author={Li, Xiaopeng and Yan, Fengyao and Zuo, Fei and Zeng, Qiang and Luo, Lannan},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2019}
+}
+
+@inproceedings{yan2019towards,
+  title={Towards touch-to-access device authentication using induced body electric potentials},
+  author={Yan, Zhenyu and Song, Qun and Tan, Rui and Li, Yang and Kong, Adams Wai Kin},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2019}
+}
+
+@inproceedings{sehatbakhsh2020new,
+  title={A new side-channel vulnerability on modern computers by exploiting electromagnetic emanations from the power management unit},
+  author={Sehatbakhsh, Nader and Yilmaz, Baki Berkay and Zajic, Alenka and Prvulovic, Milos},
+  booktitle={IEEE International Symposium on High-Performance Computer Architecture (IEEE HPCA)},
+  year={2020}
+}
+
+@inproceedings{camurati2018screaming,
+  title={Screaming channels: When electromagnetic side channels meet radio transceivers},
+  author={Camurati, Giovanni and Poeplau, Sebastian and Muench, Marius and Hayes, Tom and Francillon, Aur{\'e}lien},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2018}
+}
+
+@inproceedings{corner2002zero,
+  title={Zero-interaction authentication},
+  author={Corner, Mark D and Noble, Brian D},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2002}
+}
+
+@inproceedings{wang2016gait,
+  title={Gait recognition using wifi signals},
+  author={Wang, Wei and Liu, Alex X and Shahzad, Muhammad},
+  booktitle={ACM International Joint Conference on Pervasive and Ubiquitous Computing (ACM UbiComp)},
+  year={2016}
+}
+
+@inproceedings{sun2014touchin,
+  title={Touchin: Sightless two-factor authentication on multi-touch mobile devices},
+  author={Sun, Jingchao and Zhang, Rui and Zhang, Jinxue and Zhang, Yanchao},
+  booktitle={IEEE Conference on Communications and Network Security (IEEE CNS)},
+  year={2014},
+}
+
+@inproceedings{chauhan2017breathprint,
+  title={BreathPrint: Breathing acoustics-based user authentication},
+  author={Chauhan, Jagmohan and Hu, Yining and Seneviratne, Suranga and Misra, Archan and Seneviratne, Aruna and Lee, Youngki},
+  booktitle={ACM International Conference on Mobile Systems, Applications, and Services (ACM MobiSys)},
+  year={2017}
+}
+
+@inproceedings{chen2019taprint,
+  title={Taprint: Secure text input for commodity smart wristbands},
+  author={Chen, Wenqiang and Chen, Lin and Huang, Yandao and Zhang, Xinyu and Wang, Lu and Ruby, Rukhsana and Wu, Kaishun},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2019}
+}
+
+@inproceedings{li2019velody,
+  title={Velody: Nonlinear vibration challenge-response for resilient user authentication},
+  author={Li, Jingjie and Fawaz, Kassem and Kim, Younghyun},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2019}
+}
+
+@inproceedings{zhou2018echoprint,
+  title={Echoprint: Two-factor authentication using acoustics and vision on smartphones},
+  author={Zhou, Bing and Lohokare, Jay and Gao, Ruipeng and Ye, Fan},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2018}
+}
+
+@inproceedings{lin2018brain,
+  title={Brain password: A secure and truly cancelable brain biometrics for smart headwear},
+  author={Lin, Feng and Cho, Kun Woo and Song, Chen and Xu, Wenyao and Jin, Zhanpeng},
+  booktitle={ACM International Conference on Mobile Systems, Applications, and Services (ACM MobiSys)},
+  year={2018}
+}
+
+@inproceedings{lin2017cardiac,
+  title={Cardiac scan: A non-contact and continuous heart-based user authentication system},
+  author={Lin, Feng and Song, Chen and Zhuang, Yan and Xu, Wenyao and Li, Changzhi and Ren, Kui},
+  booktitle={International Conference on Mobile Computing and Networking (ACM MobiCom)},
+  year={2017}
+}
+
+@inproceedings{tian2013kinwrite,
+  title={KinWrite: Handwriting-Based Authentication Using Kinect.},
+  author={Tian, Jing and Qu, Chengzhang and Xu, Wenyuan and Wang, Song},
+  booktitle={Network and Distributed System Security (NDSS)},
+  year={2013},
+}
+
+@inproceedings{zhang2017proximity,
+  title={Proximity based IoT device authentication},
+  author={Zhang, Jiansong and Wang, Zeyu and Yang, Zhice and Zhang, Qian},
+  booktitle={IEEE Conference on Computer Communications (IEEE INFOCOM)},
+  year={2017},
+}
+
+@inproceedings{roth2010ir,
+  title={The IR ring: authenticating users' touches on a multi-touch display},
+  author={Roth, Volker and Schmidt, Philipp and G{\"u}ldenring, Benjamin},
+  booktitle={ACM Symposium on User Interface Software and Technology (ACM UIST)},
+  year={2010}
+}
+
+@inproceedings{li2022wearrf,
+  title={WearRF-CLA: Continuous Location Authentication with Wrist Wearables and UHF RFID},
+  author={Li, Ang and Li, Jiawei and Han, Dianqi and Zhang, Yan and Li, Tao and Zhang, Yanchao},
+  booktitle={Asia Conference on Computer and Communications Security (ACM ASIACCS)},
+  year={2022}
+}
+
+@inproceedings{2016Deep,
+  title={Deep Residual Learning for Image Recognition},
+  author={ He, K.  and  Zhang, X.  and  Ren, S.  and  Sun, J. },
+  booktitle={IEEE Conference on Computer Vision and Pattern Recognition (IEEE CVPR)},
+  year={2016},
+}
+
+@inproceedings{choi2020tempest,
+  title={Tempest comeback: A realistic audio eavesdropping threat on mixed-signal socs},
+  author={Choi, Jieun and Yang, Hae-Yong and Cho, Dong-Ho},
+  booktitle={ACM SIGSAC Conference on Computer and Communications Security (ACM CCS)},
+  year={2020}
+}
+
+@inproceedings{annadhorai2008human,
+  title={Human identification by gait analysis},
+  author={Annadhorai, Anuradha and Guenterberg, Eric and Barnes, Jaime and Haraga, Kruthika and Jafari, Roozbeh},
+  booktitle={International Workshop on Systems and Networking Support for Health Care and Assisted Living Environments (HealthNet)},
+  year={2008}
+}
+
+@inproceedings{hong2016wfid,
+  title={WFID: Passive device-free human identification using WiFi signal},
+  author={Hong, Feng and Wang, Xiang and Yang, Yanni and Zong, Yuan and Zhang, Yuliang and Guo, Zhongwen},
+  booktitle={International Conference on Mobile and Ubiquitous Systems: Computing, Networking and Services (MobiQuitous)},
+  year={2016}
+}
+
+@inproceedings{zeng2016wiwho,
+  title={WiWho: WiFi-based person identification in smart spaces},
+  author={Zeng, Yunze and Pathak, Parth H and Mohapatra, Prasant},
+  booktitle={ACM/IEEE International Conference on Information Processing in Sensor Networks (IPSN)},
+  year={2016},
+}
+
+@inproceedings{chen2015your,
+  title={Your song your way: Rhythm-based two-factor authentication for multi-touch mobile devices},
+  author={Chen, Yimin and Sun, Jingchao and Zhang, Rui and Zhang, Yanchao},
+  booktitle={IEEE Conference on Computer Communications (IEEE INFOCOM)},
+  year={2015},
+}
+
+@article{gafurov2006biometric,
+  title={Biometric Gait Authentication Using Accelerometer Sensor.},
+  author={Gafurov, Davrondzhon and Helkala, Kirsi and S{\o}ndrol, Torkjel},
+  journal={J. comput.},
+  volume={1},
+  number={7},
+  pages={51--59},
+  year={2006}
+}
+
+@article{huang2018breathlive,
+  title={BreathLive: Liveness detection for heart sound authentication with deep breathing},
+  author={Huang, Chenyu and Chen, Huangxun and Yang, Lin and Zhang, Qian},
+  journal={Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+  volume={2},
+  number={1},
+  pages={1--25},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{petitjean2016faster,
+  title={Faster and more accurate classification of time series by exploiting a novel dynamic time warping averaging algorithm},
+  author={Petitjean, Fran{\c{c}}ois and Forestier, Germain and Webb, Geoffrey I and Nicholson, Ann E and Chen, Yanping and Keogh, Eamonn},
+  journal={Knowledge and Information Systems},
+  volume={47},
+  number={1},
+  pages={1--26},
+  year={2016},
+  publisher={Springer}
+}
+
+@article{hadjilambrou2020harnessing,
+  title={Harnessing CPU electromagnetic emanations for resonance-induced voltage-noise characterization},
+  author={Hadjilambrou, Zacharias and Das, Shidhartha and Antoniades, Marco A and Sazeides, Yiannakis},
+  journal={IEEE Transactions on Computers},
+  volume={70},
+  number={9},
+  pages={1338--1349},
+  year={2020},
+  publisher={IEEE}
+}
+
+@article{abu1988electrical,
+  title={Electrical impedance in assessing human body composition: the BIA method},
+  author={Abu Khaled, M and McCutcheon, MJ and Reddy, S and Pearman, PL and Hunter, GR and Weinsier, RL},
+  journal={The American journal of clinical nutrition},
+  volume={47},
+  number={5},
+  pages={789--792},
+  year={1988},
+  publisher={Oxford University Press}
+}
+
+@article{foster1996whole,
+  title={Whole-body impedance--what does it measure?},
+  author={Foster, Kenneth R and Lukaski, Henry C},
+  journal={The American journal of clinical nutrition},
+  volume={64},
+  number={3},
+  pages={388S--396S},
+  year={1996},
+  publisher={Oxford University Press}
+}
+
+@article{zou2018bilock,
+  title={BiLock: User authentication via dental occlusion biometrics},
+  author={Zou, Yongpan and Zhao, Meng and Zhou, Zimu and Lin, Jiawei and Li, Mo and Wu, Kaishun},
+  journal={Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+  volume={2},
+  number={3},
+  pages={1--20},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{zhang2021magauth,
+  author={Zhang, Yan and Han, Dianqi and Li, Ang and Zhang, Lili and Li, Tao and Zhang, Yanchao},
+  journal={IEEE Transactions on Mobile Computing}, 
+  title={MagAuth: Secure and Usable Two-Factor Authentication with Magnetic Wrist Wearables}, 
+  volume={},
+  number={},
+  pages={1-1},
+  year={2021},
+  doi={10.1109/TMC.2021.3072598}
+}
+
+@article{zhu2020blinkey,
+  title={Blinkey: A two-factor user authentication method for virtual reality devices},
+  author={Zhu, Huadi and Jin, Wenqiang and Xiao, Mingyan and Murali, Srinivasan and Li, Ming},
+  journal={Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+  volume={4},
+  number={4},
+  pages={1--29},
+  year={2020},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{huang2019id,
+  title={Au-id: Automatic user identification and authentication through the motions captured from sequential human activities using rfid},
+  author={Huang, Anna and Wang, Dong and Zhao, Run and Zhang, Qian},
+  journal={Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+  volume={3},
+  number={2},
+  pages={1--26},
+  year={2019},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{zhu2017shakein,
+  title={ShakeIn: secure user authentication of smartphones with single-handed shakes},
+  author={Zhu, Hongzi and Hu, Jingmei and Chang, Shan and Lu, Li},
+  journal={IEEE transactions on mobile computing},
+  volume={16},
+  number={10},
+  pages={2901--2912},
+  year={2017},
+  publisher={IEEE}
+}
+
+@article{leung2018twistin,
+  title={TwistIn: Tangible authentication of smart devices via motion co-analysis with a smartwatch},
+  author={Leung, Ho-Man Colman and Fu, Chi-Wing and Heng, Pheng-Ann},
+  journal={Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+  volume={2},
+  number={2},
+  pages={1--24},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{xu2018lightweight,
+  title={A lightweight RFID mutual authentication protocol based on physical unclonable function},
+  author={Xu, He and Ding, Jie and Li, Peng and Zhu, Feng and Wang, Ruchuan},
+  journal={Sensors},
+  volume={18},
+  number={3},
+  pages={760},
+  year={2018},
+  publisher={Multidisciplinary Digital Publishing Institute}
+}
+
+@article{lu2019lasa,
+  title={LaSa: location aware wireless security access control for IoT systems},
+  author={Lu, Bingxian and Wang, Lei and Liu, Jialin and Zhou, Wei and Guo, Linlin and Jeong, Myeong-Hun and Wang, Shaowen and Han, Guangjie},
+  journal={Mobile Networks and Applications},
+  volume={24},
+  number={3},
+  pages={748--760},
+  year={2019},
+  publisher={Springer}
+}
+
+@article{du2013novel,
+  title={Novel method to detect and recover the keystrokes of ps/2 keyboard},
+  author={Du, Yu-Lei and Lu, Ying-Hua and Zhang, Jin-Ling},
+  journal={Progress In Electromagnetics Research C},
+  volume={41},
+  pages={151--161},
+  year={2013},
+  publisher={EMW Publishing}
+}
+
+@article{van1985electromagnetic,
+  title={Electromagnetic radiation from video display units: An eavesdropping risk?},
+  author={Van Eck, Wim},
+  journal={Computers \& Security},
+  volume={4},
+  number={4},
+  pages={269--286},
+  year={1985},
+  publisher={Elsevier}
+}
+
+@article{wang2018unlock,
+  title={Unlock with your heart: Heartbeat-based authentication on commercial mobile phones},
+  author={Wang, Lei and Huang, Kang and Sun, Ke and Wang, Wei and Tian, Chen and Xie, Lei and Gu, Qing},
+  journal={Proceedings of the ACM on interactive, mobile, wearable and ubiquitous technologies},
+  volume={2},
+  number={3},
+  pages={1--22},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{liu2020screen,
+  title={Screen gleaning: A screen reading TEMPEST attack on mobile devices exploiting an electromagnetic side channel},
+  author={Liu, Zhuoran and Samwel, Niels and Weissbart, L{\'e}o and Zhao, Zhengyu and Lauret, Dirk and Batina, Lejla and Larson, Martha},
+  journal={arXiv preprint arXiv:2011.09877},
+  year={2020}
+}
+
+@article{mo2013support,
+  title={A support vector machine for identification of monitors based on their unintended electromagnetic emanation},
+  author={Mo, Fan and Lu, Ying-Hua and Zhang, Jin-Ling and Cui, Qiang and Qiu, Sihai},
+  journal={Progress In Electromagnetics Research M},
+  volume={30},
+  pages={211--224},
+  year={2013},
+  publisher={EMW Publishing}
+}
+
+@article{han2018smart,
+  title={Smart home occupant identification via sensor fusion across on-object devices},
+  author={Han, Jun and Pan, Shijia and Sinha, Manal Kumar and Noh, Hae Young and Zhang, Pei and Tague, Patrick},
+  journal={ACM Transactions on Sensor Networks (TOSN)},
+  volume={14},
+  number={3-4},
+  pages={1--22},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{gafurov2009gait,
+  title={Gait recognition using wearable motion recording sensors},
+  author={Gafurov, Davrondzhon and Snekkenes, Einar},
+  journal={EURASIP Journal on Advances in Signal Processing},
+  volume={2009},
+  pages={1--16},
+  year={2009},
+  publisher={Springer}
+}
+
+@article{zhang2018mindid,
+  title={Mindid: Person identification from brain waves through attention-based recurrent neural network},
+  author={Zhang, Xiang and Yao, Lina and Kanhere, Salil S and Liu, Yunhao and Gu, Tao and Chen, Kaixuan},
+  journal={Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies},
+  volume={2},
+  number={3},
+  pages={1--23},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{6327190,
+  author={Vemulapalli, Pramod K. and Monga, Vishal and Brennan, Sean N.},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={Robust Extrema Features for Time-Series Data Analysis}, 
+  volume={35},
+  number={6},
+  pages={1464-1479},
+  year={2013},
+  doi={10.1109/TPAMI.2012.216}}
+  
+ @article{kong1975theory,
+  title={Theory of electromagnetic waves},
+  author={Kong, Jin Au},
+  journal={New York},
+  year={1975}
+}
+
+@article{sakoe1978dynamic,
+  title={Dynamic programming algorithm optimization for spoken word recognition},
+  author={Sakoe, Hiroaki and Chiba, Seibi},
+  journal={IEEE transactions on acoustics, speech, and signal processing},
+  volume={26},
+  number={1},
+  pages={43--49},
+  year={1978},
+  publisher={IEEE}
+}
+
+@misc{r1,
+author= {Arduino},
+title = {Nano},
+note  = {\url{https://docs.arduino.cc/hardware/nano}, 
+         2022},
+}
+
+@misc{r2,
+author= {{M5stack}},
+title = {M5StickC PLUS},
+note  = {\url{https://docs.m5stack.com/en/core/m5stickc_plus}, 
+         2021},
+}
+
+@misc{r3,
+author= {{Arduino}},
+title = {Mega 2560 Rev3},
+note  = {\url{https://docs.arduino.cc/hardware/mega-2560}, 
+         2022},
+}
+
+@misc{appleunlock,
+  author = {Apple},
+  title = {How to unlock your Mac with your Apple Watch},
+  note = {\url{https://support.apple.com/en-us/HT206995}, 2020},
+}
+
+@misc{IoTreport,
+    author = {Statista},
+    title = {Internet of Things (IoT) connected devices installed base worldwide from 2015 to 2025},
+    note = {\url{https://www.statista.com/statistics/471264/iot-number-of-connected-devices-worldwide/}, 2016},
+}
+
+@book{nilsson2008electric,
+  title={Electric circuits},
+  author={Nilsson, James William},
+  year={2008},
+  publisher={Pearson Education India}
+}
+
+@phdthesis{kuhn2002compromising,
+  title={Compromising emanations: eavesdropping risks of computer displays},
+  author={Kuhn, Markus Guenther},
+  year={2002},
+  school={Citeseer}
+}
